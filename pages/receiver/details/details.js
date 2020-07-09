@@ -58,6 +58,10 @@ Page({
     history: [], // 审批历史
     constructionApproval: 0, //转施工审批操作权限
     examinebuild: false, //转施工审批 false - 否 true-是
+    distribution: false,
+    DistributionData: [[]],
+    areaInfo: [[]],//转施工人员回显
+    srrpop: [],//二维数组
   },
 
   /**
@@ -69,7 +73,57 @@ Page({
     })
   },
 
+  /**施工分配 */
+  saveConsDist() {
+    this.setData({
+      distribution: !this.data.distribution
+    })
+  },
+  /**添加施工分配 */
+  addDistribution() {
+    let arr = this.data.DistributionData
+    let areaInfo = this.data.areaInfo
+    arr.push([])
+    areaInfo.push([])
+    console.log(arr)
+    this.setData({
+      areaInfo: areaInfo,
+      DistributionData: arr
+    })
+  },
+  /**删除施工分配 */
+  delDistribution(e) {
+    let index = e.target.dataset.index
+    // let arr = this.data.srrpop
+    let DistributionData = this.data.DistributionData
+    // arr.splice(index, 1)
+    DistributionData.splice(index, 1)
+    // console.log(index, arr, 'arr')
+    let areaInfo = this.data.areaInfo
+    areaInfo.splice(index, 1)
+    // console.log(this.data.areaInfo,'areaInfo')
 
+    this.setData({
+      // srrpop: arr,
+      areaInfo: areaInfo,
+      DistributionData: DistributionData
+    })
+  },
+  /**
+   * 取消施工分配
+   */
+  closeDistribution() {
+    // let karr=[]
+    // this.data.srrpop=[]
+    // let arr = this.data.srrpop
+    // arr=[]
+    this.setData({
+      areaInfo:[[]],
+      DistributionData:[[]],
+      distribution: !this.data.distribution,
+
+    })
+  },
   /**
    * 跳转到点位信息
    */
@@ -511,18 +565,69 @@ Page({
     }
     return [shi, qu];
   },
-  bindMultiPickerChange: function(e) {
-    let loginName = '';
-    if (this.data.ssl[e.detail.value[0]].nameList[e.detail.value[1]].loginNameList.length != 0) {
-      loginName = this.data.ssl[e.detail.value[0]].nameList[e.detail.value[1]].loginNameList[e.detail.value[2]].loginName; //所属区域
-    } else {
-      loginName = "";
+  bindinputAddress(event) {
+    console.log(event, 'event')
+    // let address = this.data.address;
+    // address.address = event.detail.value;
+    // this.setData({
+    //   address: address
+    // });
+  },
+
+  changeInput(e){
+    this.data.activeIndex = e.target.dataset.index
+
+  },
+  // 
+  citySure: function (e) {
+    console.log(e, this.data.activeIndex,'==e')
+    var data = {
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
+    };
+    data.multiIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        this.setData({
+          thisSheng: e.detail.value
+        })
+        var row = this.getCity(e.detail.value);
+        data.multiArray[1] = row[0];
+        data.multiArray[2] = row[1];
+
+        data.multiIndex[1] = 0;
+        data.multiIndex[2] = 0;
+        break;
+      case 1:
+        var row = this.getCity(this.data.thisSheng, e.detail.value);
+        data.multiArray[2] = row[1];
+        data.multiIndex[2] = 0;
+        break;
     }
+
+    var areaInfo = [].concat.apply([], this.data.multiArray);
+    this.data.DistributionData[this.data.activeIndex] = e.detail.value
+    this.data.areaInfo[this.data.activeIndex] = [areaInfo.join(' - ')]
+    console.log(this.data.areaInfo)
+    this.setData({
+      areaInfo: this.data.areaInfo,
+      DistributionData: this.data.DistributionData
+    })
+  },
+  // bindMultiPickerChange
+  SubmitDistribution: function(e) {
+    // let loginName = '';
+    // if (this.data.ssl[e.detail.value[0]].nameList[e.detail.value[1]].loginNameList.length != 0) {
+    //   loginName = this.data.ssl[e.detail.value[0]].nameList[e.detail.value[1]].loginNameList[e.detail.value[2]].loginName; //所属区域
+    // } else {
+    //   loginName = "";
+    // }
     // 刷新数据
     let url = BUILDER_YES_URL;
     let params = {
-      loginName: loginName,
-      dwId: this.data.item.id
+      // loginName: loginName,
+      dwId: this.data.item.id,
+      shoiArray: JSON.stringify(this.data.DistributionData)
     };
     httpPostNew(url, params).then(res => {
       if (res.obj) {

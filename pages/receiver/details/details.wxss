@@ -250,7 +250,47 @@ textarea {
   right: 0;
   z-index: 11;
 }
+.examine-model-yes1 {
+  width: 652rpx;
+  height: 420rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+ 
+}
+.examine-model-yes1 .examine-model-input {
+  width: 100%;
+  height: 260rpx;
+  box-sizing: border-box;
+  padding: 0 30rpx 30rpx;
+  font-size: 28rpx;
+}
+.examine-model-yes2 .content-item{
+  display: flex;
+  justify-content: space-between;
+  padding:4rpx  40rpx;
+}
 
+.examine-model-yes2 {
+  width: 652rpx;
+  height: 1056rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+/*******/
+.distribution-list{
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.select-box{
+  /* flex: 1; */
+  margin: 10rpx 10rpx 0 10rpx;
+  /* background: red; */
+  /* padding: 10px; */
+}
+.select-box input{
+  width:100%;
+}
 /* 同意申请框样式 */
 
 .examine-model-yes {
