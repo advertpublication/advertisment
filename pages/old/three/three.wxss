@@ -1,0 +1,84 @@
+page {
+  width: 100%;
+  height: 100%;
+  color: #333;
+  font-size: 40rpx;
+}
+
+/* 上半部分 */
+
+.header {
+  width: 100%;
+  height: 60%;
+  background-color: rgb(242, 242, 242);
+}
+
+.title {
+  color: green;
+  margin: 40rpx;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 10px 10px 10px 50px;
+  font-size: 34rpx;
+}
+
+text{
+  width: 200rpx;
+  line-height: 70rpx;
+  height: 70rpx
+}
+
+.active{
+  color: red;
+}
+
+/* .select{
+  color: blue;
+} */
+/* 下半部分 */
+
+.bottom {
+  width: 100%;
+  height: 40%;
+}
+
+.bottom-first {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 40rpx;
+}
+
+.sign {
+  font-size: 34rpx;
+  padding: 0px 0px 10px;
+}
+
+.textarea {
+  width: 580rpx;
+  background-color: white;
+  border: 4rpx solid rgb(0, 122, 192);
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  margin-left: 10rpx;
+}
+
+button {
+  background-color: rgb(31, 134, 232);
+  display: inline-block;
+  line-height: 2.3;
+  font-size: 16px;
+  padding: 0 1.34em;
+  color: white;
+  margin: 4rpx;
+}
+
+.bottom-second{
+  float: right;
+  margin-right: 40rpx;
+}

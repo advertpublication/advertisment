@@ -1,0 +1,97 @@
+<!-- 顶部图片 -->
+<view class="header">
+  <image class="picture" src="../../images/poster.png"></image>
+  <!-- 我的 -->
+  <view class="icon">
+    <image src="../../images/mine.png" bindtap="changePwd"></image>
+  </view>
+</view>
+
+<!-- 受理人按钮组 -->
+<block wx:if="{{id == 'proposer'}}">
+  <view class="btns">
+    <view 
+        class="btn" 
+        data-business="proposer-apply" 
+        bindtap="toList">
+      <view class="color-btn yellow-btn"></view>
+      <view>
+        <text>上刊申请</text>
+      </view>
+    </view>
+    <view 
+        class="btn" 
+        data-business="proposer-check" 
+        bindtap="toList">
+      <view class="color-btn green-btn"></view>
+      <view>
+        <text>上刊审核</text>
+      </view>
+    </view>
+    <view 
+        class="btn" 
+        data-business="proposer-log" 
+        bindtap="toList">
+      <view class="color-btn blue-btn"></view>
+      <view>
+        <text>上刊日志</text>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!-- 审核人按钮组 -->
+<block wx:if="{{id == 'verifier'}}">
+  <view class="btns">
+    <view 
+        class="btn"
+        data-business="verifier-approve" 
+        bindtap="toList">
+      <view class="color-btn yellow-btn"></view>
+      <view>
+        <text>全部未处理</text>
+      </view>
+    </view>
+    <view 
+        class="btn"
+        data-business="verifier-log" 
+        bindtap="toList">
+      <view class="color-btn green-btn"></view>
+      <view>
+        <text>审核日志</text>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!-- 底部列表 -->
+<view class="wait">
+  <view class="title">
+    <text>未处理</text>
+  </view>
+  <view class="list">
+    <block 
+        wx:for="{{list}}" 
+        wx:key="{{index}}"
+    >
+      <view 
+          class="item" 
+          data-id="{{item.id}}"
+          data-previousno="{{item.previousno}}"
+          data-item="{{item}}" 
+          bindtap="toDetail">
+        <view>
+          <image class="image" src="{{item.imgurl}}"></image>
+        </view>
+        <view class="info">
+          <text class="position">{{item.medialocation}}</text>
+          <text class="company">{{item.contractName}}</text>
+          <text class="date">{{item.registerDate}}</text>
+        </view>
+        <!-- <view class="status">
+          <text class="text-blue">{{item.status}}</text>
+        </view> -->
+      </view>
+    </block>
+  </view>
+</view>

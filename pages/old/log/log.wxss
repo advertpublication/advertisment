@@ -1,0 +1,127 @@
+page{
+  width: 100%;
+  height: 100%;
+  font-size: 30rpx;
+  color: #333333;
+}
+
+/* 头部切换按钮 */
+.swiper-header{
+  width: 100%;
+  height: 10%;
+  display: flex;
+}
+
+.swiper-header view{
+  width: 50%;
+  height: 100%;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.active{
+  box-sizing: border-box;
+  border-bottom: 1px solid blue;
+}
+
+swiper, .swiper-item{
+  width: 100%;
+  height: 90%;
+  background-color: #eeeeee;
+}
+
+/* 申请单 内容 */
+.content{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 40rpx;
+  background-color: #eeeeee;
+}
+
+/* 图片 */
+.picture{
+  width: 100%;
+  height: 50%; 
+}
+.picture image{
+  width: 100%;
+  height: 90%;
+  background-color: #ffffff;
+}
+
+scroll-view{
+  width: 100%;
+  height: 50%;
+  background-color: #ffffff;
+}
+.info-first{
+ box-sizing: border-box;
+  padding: 0 40rpx; 
+}
+text{
+  display: flex;
+  padding: 3rpx;
+}
+.column{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+
+/* 审核表 */
+.table{
+  width: 100%;
+  height: 85%;
+  margin-top: 40rpx;
+  background-color: #eeeeee;
+}
+
+.tr{
+  width: 100%;
+  height: 100rpx;
+}
+
+.thead .tr{
+  background-color: blue;
+}
+
+.tbody .tr:nth-child(odd){
+  background-color: #2d799749;
+}
+
+.tbody .tr:nth-child(even){
+  background-color: #aaaaaa;
+}
+
+.td{
+  width: 30%;
+  height: 100%;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* line-height: 100rpx; */
+  text-align: center;
+  color: #ffffff;
+}
+
+.td:first-child{
+  width: 10%;
+}
+
+/* .tbody .td:last-child{
+  display: flex;
+  align-items: center;
+} */
+
+.td button{
+  width: 120rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+}

@@ -1,0 +1,106 @@
+// 上刊申请
+var acceptList = [
+  "未受理", 
+  ["已受理, 未提交", "已受理, 已提交"],
+  "受理驳回"
+];
+// 上刊审核
+var flowList = ["", "审批中", "已通过", "未通过"];
+// 上刊日志
+var conditionList = ["正在施工", "已上刊", "已下刊"];
+
+var formatText = function (business, accept, submit, flow, condition){
+  accept = parseInt(accept);
+  submit = parseInt(submit);
+  flow = parseInt(flow);
+  condition = parseInt(condition);
+
+  var text = "";
+  switch(business){
+    case "proposer-apply": 
+      if (accept == 1) {
+        text = acceptList[accept][submit];
+      } else {
+        text = acceptList[accept];
+      }
+      break;
+    case "proposer-check":
+      text = flowList[flow];
+      break;
+    case "proposer-log":
+      if (accept == 1) {
+        if(flow == 2){
+          text = conditionList[condition];
+        }else{
+          text = flowList[flow];
+        }
+      } else {
+        text = acceptList[accept];
+      }
+      break;
+    case "verifier-log":
+      if (accept == 1) {
+        if (flow == 2) {
+          text = conditionList[condition];
+        } else {
+          text = flowList[flow];
+        }
+      } else {
+        text = acceptList[accept];
+      }
+      break;
+  }
+  // console.log("text", text);
+  return text;
+}
+
+
+// 上刊申请 颜色
+var acceptColor = [
+  "text-red",
+  ["text-blue", "text-green"],
+  "text-red"
+];
+// 上刊审核 颜色
+var flowColor = ["", "text-blue", "text-green", "text-red"];
+// 上刊日志 颜色
+var conditionColor = ["text-blue", "text-green", "text-grey"];
+
+var formatColor = function (business, accept, submit, flow, condition){
+  accept = parseInt(accept);
+  submit = parseInt(submit);
+  flow = parseInt(flow);
+  condition = parseInt(condition);
+
+  var color = "";
+  switch(business){
+    case "proposer-apply":
+      if (accept == 1) {
+        color = acceptColor[accept][submit];
+      } else {
+        color = acceptColor[accept];
+      }
+      break;
+    case "proposer-check":
+      color = flowColor[flow];
+      break;
+    case "proposer-log":
+      if(accept == 1){
+        if(flow == 2){
+          color = conditionColor[condition];
+        }else{
+          color = flowColor[flow];
+        }
+      }else{
+        color = acceptColor[accept];
+      }
+      break;
+  }
+  // console.log("color", color)
+  return color;
+}
+
+module.exports = {
+  formatText: formatText,
+  formatColor: formatColor
+}

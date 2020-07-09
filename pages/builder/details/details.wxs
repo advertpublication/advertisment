@@ -1,0 +1,30 @@
+var filter = {
+  beautySub: function (str, len) {
+    slice = str.substring(0, len)
+    return slice + (len < str.length ? "..." : "");
+  },
+  checkMarshalling: function (marshallingName, numindex){
+   //console.log(numindex);
+    for (var i = 0; i < marshallingName.split(",").length; i++) {
+       var seconde = marshallingName.split(",")[i]
+      if (numindex == seconde.split("/")[1]) {
+       return numindex==seconde.split("/")[1];
+      }
+
+    }
+  },
+  getMarshalling: function (trainTypeName, marshallingName, numindex) {
+    for (var i = 0; i < marshallingName.split(",").length;i++){
+      var seconde=marshallingName.split(",")[i]
+      if (numindex == seconde.split("/")[1]){
+        return seconde.split("/")[0];
+      }
+   }
+  }
+}
+
+module.exports = {
+  getMarshalling:filter.getMarshalling,
+  checkMarshalling: filter.checkMarshalling,
+  beautySub: filter.beautySub
+}

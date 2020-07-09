@@ -1,0 +1,2 @@
+<!-- <web-view src="https://ad.12306.cn/app/advertwechat/a/wechat/advertpublication/login?code={{code}}"></web-view> -->
+<web-view src="{{src}}"></web-view>

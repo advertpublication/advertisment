@@ -1,0 +1,184 @@
+/* header */
+.header{
+  width: 750rpx;
+  height: 100rpx;
+  box-sizing: border-box;
+  padding: 15rpx 0 12rpx 40rpx;
+  background-color: #e6e6e6;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header > input{
+  width: 550rpx;
+  height: 70rpx;
+  box-sizing: border-box;
+  /* border: 1px solid rgba(0, 0, 0, 0.6); */
+  padding-left: 80rpx;
+  background-color: #ffffff;
+
+  position: relative;
+}
+
+.header .image{
+  width: 48rpx;
+  height: 48rpx;
+
+  position: absolute;
+  top: 10rpx;
+  left: 20rpx;
+}
+
+.placeholder{
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.3);
+  line-height: 26rpx;
+}
+
+.cancel{
+  padding-left: 20rpx;
+
+  font-size: 26rpx;
+  color: #00b0f0;
+  line-height: 26rpx;
+}
+
+/* 内容 */
+.content{
+  width: 750rpx;
+  box-sizing: border-box;
+  padding-top: 100rpx;
+}
+
+.can-do{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title{
+  padding: 0 36rpx;
+
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.3);
+  line-height: 26rpx;
+}
+
+.title-line{
+  width: 148rpx;
+  height: 0;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+  padding-top: 5rpx;
+}
+
+/* 图标 */
+.icons{
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 60rpx;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon{
+  width: 110rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.3);
+  line-height: 26rpx;
+}
+
+.icon:nth-child(2){
+  margin: 0 106rpx;
+}
+
+.icon > image{
+  width: 61rpx;
+  height: 56rpx;
+}
+
+.icon > text{
+  padding-top: 30rpx;
+}
+
+/* 提示文字 */
+.tips{
+  width: 750rpx;
+  box-sizing: border-box;
+  border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+  padding: 24rpx 0 24rpx 40rpx;
+  background-color: #e6e6e6;
+
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 26rpx;
+}
+
+/* 搜索结果 列表 */
+/* 列表 */
+.list{
+  width: 750rpx;
+}
+
+/* 列表项 */
+.item{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30rpx 20rpx;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  position: relative;
+}
+
+/* 列表图片 */
+.item .image{
+  width: 174rpx;
+  height: 140rpx;
+}
+
+/* 列表信息 */
+.info{
+  height: 140rpx;
+  box-sizing: border-box;
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-end; */
+}
+
+.info > text{
+  padding-bottom: 12rpx;
+
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 26rpx;
+}
+
+.info > .station{
+  padding-bottom: 15rpx;
+  font-size: 30rpx;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 30rpx;
+}
+
+.date{
+  position: absolute;
+  top: 30rpx;
+  right: 20rpx;
+
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 26rpx;
+}

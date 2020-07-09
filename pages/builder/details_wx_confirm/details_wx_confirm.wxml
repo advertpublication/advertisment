@@ -1,0 +1,309 @@
+<!-- 上刊基本信息 -->
+<wxs module="filter" src="../details/details.wxs"></wxs>
+<view class='issue-info'>
+  <view class="title">
+    <text>上刊基本信息</text>
+  </view>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon1.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.contractName}}</text>
+      </view>
+    </view>
+    <view class="right star-container">
+      <view class="white-star">
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+      </view>
+
+      <view class="star" style="width: {{starWidth}}">
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon2.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.bdid2name}}</text>
+      </view>
+    </view>
+    <view class="rights" bindtap='companyInfo'>
+      <view>
+        <text>资质</text>
+      </view>
+      <view class="arrow">
+        <image src="../../../images/arrow.png"></image>
+      </view>
+    </view>
+  </view>
+  <block>
+    <view class="item" wx:if="{{item.publType == '0'}}">
+      <view class="left">
+        <view class="icon">
+          <image class='images' src="../../../images/icon3.png"></image>
+        </view>
+        <view class="field">
+          <text>{{item.mediatype}}</text>
+        </view>
+      </view>
+      <view class="rights" bindtap='mediaInfo'>
+        <view>
+          <text>媒体详情</text>
+        </view>
+        <view class="arrow">
+          <image src="../../../images/arrow.png"></image>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{item.publType == '1'}}">
+    <view class="item" wx:for="{{item.dwAdvertinstallresourceList}}" wx:key="{{index}}" data-item="{{item}}">
+      <view class="left">
+        <view class="icon">
+          <image class='images' src="../../../images/train.png"></image>
+        </view>
+        <view class="field">
+          <text>{{item.trainTypeName}}~{{item.mediacount}}组~{{item.mediatypename}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon4.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.begindate}} ~ {{item.enddate}} ({{item.datenum}}天 )</text>
+      </view>
+    </view>
+    <view class="right">
+
+    </view>
+  </view>
+  <view class="item" wx:if="{{item.publType == '0'}}">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon5.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.properystation}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="item" wx:if="{{item.publType == '0'}}">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon5.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.medialocation}}</text>
+      </view>
+    </view>
+    <block wx:if="{{item.cmMediaImgList.length>0}}">
+      <view class="rights" bindtap='issueContent'>
+        <view>
+          <text>点位图</text>
+        </view>
+        <view class="arrow">
+          <image src="../../../images/arrow.png"></image>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!--备注信息 -->
+  <view class="item" wx:if="{{item.remark != ''}}">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/bz.png"></image>
+      </view>
+      <view class="field">
+        <text>备注信息: {{item.remark}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 上刊效果图 -->
+<view class="middle">
+  <view class="title">
+    <text>上刊效果图</text>
+  </view>
+  <swiper indicator-dots="{{true}}" current="0">
+    <block wx:for="{{item.materialImage}}" data-index='{{index}}' data-item="{{item}}">
+      <swiper-item>
+        <block wx:if="{{isMp4[index]}}">
+          <image class="picture" bindtap="previewImage" data-src="{{item}}" src="{{item}}"></image>
+        </block>
+        <block wx:if="{{!isMp4[index]}}">
+          <video src="{{item}}" controls></video>
+        </block>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<!-- <view class='middle-bottom'>
+  <view class='title'>审批通过时间: \t{{approveTime}}</view>
+</view>
+<view class='middle-bottom'>
+  <view class='title'>施工时间: \t{{buildtime}}</view>
+</view> -->
+<block wx:if="{{item.buildstatus == '0'}}">
+  <form>
+    <view class="result">
+
+      <view class="title" wx:if="{{item.publType == '1'}}">
+        <text>列车车底号登记</text>
+      </view>
+
+      <view class="table" wx:if="{{item.publType == '1'}}">
+        <block wx:for="{{item.dwAdvertinstallresourceList}}" wx:key="*this" wx:for-item="resourceItem" wx:for-index="resourceindex">
+          <block wx:for="{{resourceItem.inputArray}}" wx:key="*this" wx:for-item="inputItem" wx:for-index="numindex">
+            <view class="tr bg-g" wx:if="{{numindex % 2 == 0}}">
+              <view class="td">{{resourceItem.trainTypeName}}</view>
+              <view class="td">{{filter.beautySub(resourceItem.mediatypename,12)}}</view>
+              <view class="td">
+                <block wx:if="{{resourceItem.marshallingName}}">
+                  {{filter.getMarshalling(resourceItem.trainTypeName,resourceItem.marshallingName,numindex)}}
+                </block>
+                <block wx:if="{{!resourceItem.marshallingName || !filter.checkMarshalling(resourceItem.marshallingName,numindex)}}">
+                  {{resourceItem.trainTypeName}}-
+                  <input class='marshalling-num' data-resource="{{resourceindex}}" data-num="{{numindex}}" value="{{inputItem}}" bindblur="doInput"></input>
+                </block>
+              </view>
+            </view>
+            <view class="tr" wx:else>
+              <view class="td">{{resourceItem.trainTypeName}}</view>
+              <view class="td">{{filter.beautySub(resourceItem.mediatypename,12)}}</view>
+              <view class="td">
+                <block wx:if="{{resourceItem.marshallingName}}">
+                  {{filter.getMarshalling(resourceItem.trainTypeName,resourceItem.marshallingName,numindex)}}
+                </block>
+                <block wx:if="{{!resourceItem.marshallingName  || !filter.checkMarshalling(resourceItem.marshallingName,numindex)}}">
+                  {{resourceItem.trainTypeName}}-
+                  <input class='marshalling-num' data-resource="{{resourceindex}}" data-num="{{numindex}}" value="{{inputItem}}" bindblur="doInput"></input>
+                </block>
+              </view>
+            </view>
+          </block>
+        </block>
+      </view>
+      <view class="photo-list">
+        <block wx:for="{{item.buildImage}}" wx:key="{{index}}">
+          <view class="photo">
+           	<image src="{{item.filename}}" data-src="{{item.filename}}" bindtap="previewPhoto"></image>
+						<view class="cover f-jb">
+							<view>{{item.resultTime}}</view>
+						</view>
+          </view>
+        </block>
+        <block wx:for="{{photoList}}" wx:key="{{index}}">
+          <view class="photo" data-src="{{item}}" bindtap="previewPhoto">
+            <image src="{{item}}"></image>
+            <view class="delete-photo" data-index="{{index}}" catchtap="deletePhoto">
+              <image src="../../../images/delete.png"></image>
+            </view>
+          </view>
+        </block>
+        <!-- <view class="photo add-photo" bindtap="addPhoto">
+          <image src="../../../images/add.png"></image>
+        </view> -->
+      </view>
+      <view class="title">
+        <text>施工结果说明</text>
+      </view>
+      	<view class="input-explain">
+        <block wx:for="{{item.buildremarks}}">
+          <view>{{item.remark}}"-------"{{item.resultTime}}</view>
+        </block>
+				<!-- <textarea placeholder="请输入施工说明" value="{{explain}}" bindinput='inputExplain'></textarea> -->
+			</view>
+    </view>
+
+    <!-- 按钮组 -->
+    <block wx:if="{{item.advertStatus=='0'}}">
+      <view class="btns">
+      <button class="btn-green" id='submit' bindtap='buildConfirm'>施工结果确认</button>
+    </view>
+    </block>
+     
+    
+  </form>
+</block>
+<block wx:elif="{{item.buildstatus == '1'}}">
+  <view class="result">
+    <view class="title" wx:if="{{item.publType == '1'}}">
+      <text>列车车底号</text>
+    </view>
+    <view class="table">
+      <!-- <view class="tr bg-w">
+          <view class="th">车型</view>
+          <view class="th">媒体类型</view>
+          <view class="th ">车底号</view>
+        </view> -->
+     <block wx:for="{{item.dwAdvertinstallresourceList}}" wx:key="*this" wx:for-item="resourceItem" wx:for-index="resourceindex" wx:if="{{item.publType == '1'}}">
+        <block wx:for="{{resourceItem.inputArray}}" wx:key="*this" wx:for-item="inputItem" wx:for-index="numindex">
+          <view class="tr bg-g" wx:if="{{numindex % 2 == 0}}">
+            <view class="td">{{resourceItem.trainTypeName}}</view>
+            <view class="td">{{filter.beautySub(resourceItem.mediatypename,12)}}</view>
+            <view class="td">
+              <block wx:if="{{resourceItem.marshallingName}}">
+                {{filter.getMarshalling(resourceItem.trainTypeName,resourceItem.marshallingName,numindex)}}
+              </block>
+              <block wx:if="{{!resourceItem.marshallingName || !filter.checkMarshalling(resourceItem.marshallingName,numindex)}}">
+                {{resourceItem.trainTypeName}}-
+                <input class='marshalling-num' data-resource="{{resourceindex}}" data-num="{{numindex}}" value="{{inputItem}}" bindblur="doInput"></input>
+              </block>
+            </view>
+          </view>
+          <view class="tr" wx:else>
+            <view class="td">{{resourceItem.trainTypeName}}</view>
+            <view class="td">{{filter.beautySub(resourceItem.mediatypename,12)}}</view>
+            <view class="td">
+              <block wx:if="{{resourceItem.marshallingName}}">
+                {{filter.getMarshalling(resourceItem.trainTypeName,resourceItem.marshallingName,numindex)}}
+              </block>
+              <block wx:if="{{!resourceItem.marshallingName  || !filter.checkMarshalling(resourceItem.marshallingName,numindex)}}">
+                {{resourceItem.trainTypeName}}-
+                <input class='marshalling-num' data-resource="{{resourceindex}}" data-num="{{numindex}}" value="{{inputItem}}" bindblur="doInput"></input>
+              </block>
+            </view>
+          </view>
+        </block>
+      </block>
+    </view>
+    <view class="photo-list">
+      <block wx:for="{{item.buildImage}}" wx:key="{{index}}">
+        <view class="photo">
+          <image src="{{item.filename}}" data-src="{{item.filename}}" bindtap="previewPhoto"></image>
+					<view class="cover f-jb">
+						<view>{{item.resultTime}}</view>
+					</view>
+        </view>
+      </block>
+    </view>
+    <block wx:if="{{item.remarks != ''}}">
+      <view class="title">
+        <text>施工结果说明</text>
+      </view>
+      <view class="input-explain">
+         <block wx:for="{{item.buildremarks}}">
+          <view>{{item.remark}}"------"{{item.resultTime}}</view>
+        </block>
+      </view>
+    </block>
+  </view>
+</block>

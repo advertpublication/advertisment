@@ -1,0 +1,272 @@
+<!-- 上刊基本信息 -->
+<view class='issue-info'>
+	<view class="title">
+		<text>上刊基本信息</text>
+	</view>
+	<view class="item">
+		<view class="left">
+			<view class="icon">
+				<image class='images' src="../../../images/icon1.png"></image>
+			</view>
+			<view class="field">
+				<text>{{item.contractName}}</text>
+			</view>
+		</view>
+		<view class="right star-container">
+			<view class="white-star">
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+			</view>
+
+			<view class="star" style="width: {{starWidth}}">
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+			</view>
+		</view>
+	</view>
+	<view class="item">
+		<view class="left">
+			<view class="icon">
+				<image class='images' src="../../../images/icon2.png"></image>
+			</view>
+			<view class="field">
+				<text>{{item.bdid2name}}</text>
+			</view>
+		</view>
+		<view class="rights" bindtap='companyInfo'>
+			<view>
+				<text>资质</text>
+			</view>
+			<view class="arrow">
+				<image src="../../../images/arrow.png"></image>
+			</view>
+		</view>
+	</view>
+	<block wx:if="{{item.publType == '0'}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/icon3.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.mediatype}}</text>
+				</view>
+			</view>
+			<view class="rights" bindtap='mediaInfo'>
+				<view>
+					<text>媒体详情</text>
+				</view>
+				<view class="arrow">
+					<image src="../../../images/arrow.png"></image>
+				</view>
+			</view>
+		</view>
+	</block>
+	<block wx:if="{{item.publType == '1'}}">
+		<view class="item" wx:for="{{item.dwAdvertinstallresourceList}}" wx:key="{{index}}" data-item="{{item}}">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/train.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.trainTypeName}}~{{item.mediacount}}组~{{item.mediatypename}}</text>
+				</view>
+			</view>
+		</view>
+	</block>
+	<block wx:if="{{railwaybureau != 'Y'}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/icon4.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.begindate}} ~ {{item.enddate}} ({{item.datenum}}天 )</text>
+				</view>
+			</view>
+			<view class="right">
+			</view>
+		</view>
+	</block>
+
+	<block wx:if="{{item.publType == '0'}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/icon5.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.properystation}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/icon5.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.medialocation}}</text>
+				</view>
+			</view>
+			<block wx:if="{{item.cmMediaImgList.length>0}}">
+				<view class="rights" bindtap='issueContent'>
+					<view>
+						<text>点位图</text>
+					</view>
+					<view class="arrow">
+						<image src="../../../images/arrow.png"></image>
+					</view>
+				</view>
+			</block>
+		</view>
+	</block>
+	<!-- 广告内容 -->
+	<block wx:if="{{item.advertisingheadlines != null&&item.advertisingheadlines !=''}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/bz.png"></image>
+				</view>
+				<view class="field-content">
+					<text>广告内容: {{item.advertisingheadlines}}</text>
+				</view>
+			</view>
+		</view>
+	</block>
+	<!--备注信息 -->
+	<block wx:if="{{item.remark !=''}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/bz.png"></image>
+				</view>
+				<view class="field-content">
+					<text>备注信息: {{item.remark}}</text>
+				</view>
+			</view>
+		</view>
+	</block>
+</view>
+
+<!-- 上刊效果图 -->
+<view class="middle">
+	<block wx:if="{{item.materialImage}}">
+		<view class="title">
+			<text>上刊效果图</text>
+		</view>
+		<swiper indicator-dots="{{true}}" current="0">
+			<block wx:for="{{item.materialImage}}" data-index='{{index}}' data-item="{{item}}">
+				<swiper-item>
+					<block wx:if="{{isMp4[index]}}">
+						<image class="picture" bindtap="imgYu" data-src="{{item}}" src="{{item}}"></image>
+					</block>
+					<block wx:if="{{!isMp4[index]}}">
+						<video src="{{item}}" controls></video>
+					</block>
+				</swiper-item>
+			</block>
+		</swiper>
+	</block>
+	<block wx:else>
+		<view class="title">
+			<text>上刊内容:</text>
+		</view>
+		<view class='advert-content'>{{item.advertisingheadlines}}</view>
+	</block>
+</view>
+
+<!-- 审批历史 -->
+<view class="history">
+	<view>
+		<view class="title">
+			<text>施工负责人洽谈信息</text>
+		</view>
+		<view class="content">
+			<view class="content-item">
+				<text>施工时间</text>
+				<!-- <view>{{list[0].constTime}}</view> -->
+				<view class="section">
+					<picker mode="date" value="{{dates}}" start="2019-01-01" end="2069-1-23" bindchange="bindDateChange">
+						<view class="picker">
+							{{dates}}
+						</view>
+					</picker>
+				</view>
+				<view class="section">
+					<picker mode="time" value="{{times}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+						<view class="picker">
+							{{times}}
+						</view>
+					</picker>
+				</view>
+				<view class="section">
+					（时间可修改）
+				</view>
+			</view>
+			<view class="content-item">
+				<text>施工人员</text>
+				<view>{{list[0].constName}}</view>
+			</view>
+			<view class="content-item">
+				<text>施工人员电话</text>
+				<view>18341268908</view>
+			</view>
+			<view class="content-item-1">
+				<text>施工负责人意见</text>
+				<view class="textarea-item">
+					<textarea bindinput='textarea' value='{{list[0].workContent}}' placeholder="请输入要洽谈内容，且不超过200字..."></textarea>
+				</view>
+			</view>
+			<view>
+			</view>
+		</view>
+	</view>
+	<view class="station-item">
+		<view class="title">
+			<text>站段负责人反馈信息</text>
+		</view>
+		<view class="content">
+			<view class="content-item">
+				<text class="content-item-title">站段接洽人</text>
+				<view class="input-box">
+					<!-- <picker bindchange="bindPickerChange1" value="{{index}}" range="{{uNameArray}}">
+							<view class="picker-1">
+								{{uNameArray[index]}}
+							</view>
+						</picker> -->
+					<input type="text" value="{{constStationPerson}}" placeholder="请输入洽谈人姓名" class='search' placeholder-class="placeholder" bindinput="doConstStationPerson" disabled="disabled">
+					</input>
+				</view>
+			</view>
+			<view class="content-item">
+				<text class="content-item-title">站段接洽人电话</text>
+				<view class="input-box">
+					<input type="text" value="{{constStationPersonPhone}}" placeholder="请输入洽谈人电话" class='search' placeholder-class="placeholder" bindinput="doConstStationPersonPhone" disabled="disabled">
+					</input>
+				</view>
+				<!-- <view>{{uList[index].phone}}</view> -->
+			</view>
+			<view class="content-item-1">
+				<text>站段负责人意见</text>
+				<view class="textarea-item">
+					<textarea value='{{stationNegotiationContent}}' placeholder="请输入要洽谈内容，且不超过200字..." disabled="disabled"></textarea>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+<block wx:if="{{hide}}">
+	<block wx:if="{{list[0].state == 0}}">
+		<view class="btns">
+			<button class="btn-green" id='approve' bindtap='tapBtn'>提交</button>
+			<button class="btn-orange" id='reject' bindtap='tapBtn'>确认</button>
+		</view>
+	</block>
+</block>

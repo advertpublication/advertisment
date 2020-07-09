@@ -1,0 +1,81 @@
+page{
+  width: 100%;
+  height: 100%;
+  font-size: 30rpx;
+  color: #333333;
+}
+
+/* 图片 */
+.header{
+  width: 100%;
+  height: 85%;
+  box-sizing: border-box;
+  padding: 40rpx;
+  background-color: #eeeeee;
+}
+
+.picture{
+  width: 100%;
+  height: 50%; 
+}
+.picture image{
+  width: 100%;
+  height: 90%;
+  background-color: #ffffff;
+}
+.info{
+  width: 100%;
+  height: 50%;
+  background-color: #ffffff;
+}
+.info-first{
+ box-sizing: border-box;
+  padding: 0 40rpx; 
+}
+text{
+  display: flex;
+  padding: 3rpx;
+}
+.column{
+  display: flex;
+  justify-content: space-between;
+}
+/* 按钮组 */
+.btns{
+  width: 100%;
+  height: 15%;
+  box-sizing: border-box;
+  padding: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btns button{
+  height: 80rpx;
+  padding: 0;
+  margin: 0;
+  line-height: 80rpx;
+  font-size: 26rpx;
+  color: #ffffff;
+}
+
+.apply-btns  button{
+  width: 30%;
+}
+.check-btns button{
+  width: 40%;
+}
+
+/* 按钮颜色 */
+.btn-green{
+  background-color: green;
+}
+
+.btn-blue{
+  background-color: blue;
+}
+
+.btn-grey{
+  background-color: grey;
+}

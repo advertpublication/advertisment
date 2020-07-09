@@ -1,0 +1,19 @@
+<view class="table">
+  <view class="tr bg-w">
+    <view class="th">媒体编码</view>
+    <view class="th">媒体类型</view>
+    <view class="th ">媒体位置描述</view>
+  </view>
+  <block wx:for="{{listData}}" wx:key="{{code}}">
+    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+      <view class="td">{{item.mediaid}}</view>
+      <view class="td">{{item.mediatypename}}</view>
+      <view class="td">{{item.medialocationdescribe}}</view>
+    </view>
+    <view class="tr" wx:else>
+      <view class="td">{{item.mediaid}}</view>
+      <view class="td">{{item.mediatypename}}</view>
+      <view class="td">{{item.medialocationdescribe}}</view>
+    </view>
+  </block>
+</view>

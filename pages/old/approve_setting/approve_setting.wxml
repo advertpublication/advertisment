@@ -1,0 +1,51 @@
+<!-- <view class="create">
+  <view class="title">
+    <text>创建新环节</text>
+  </view>
+  <view class="content">
+    <picker
+        mode="multiSelector"
+        class="picker"
+        value="{{pickerIndex}}" 
+        range="{{pickerList}}"
+        bindcolumnchange="columnChange"
+        bindchange="pickerChange"
+    >
+      <view class="picker">
+        <view class="depart">组织机构: {{depart}}</view>
+        <view class="user">选择用户: {{user}}</view>
+      </view>
+    </picker>
+  </view>
+</view> -->
+
+<view class="btns">
+  <button class="btn-blue" bindtap="addNode">创建新环节</button>
+  <block wx:if="{{list.length > 0}}">
+    <button class="btn-blue" bindtap="doLaunch">保存</button>
+  </block>
+</view>
+
+<block wx:if="{{list.length > 0}}">
+  <view class="table">
+    <view class="thead">
+      <view class="tr">
+        <view class="td">审批环节</view>
+        <view class="td">审批人</view>
+        <view class="td">操作</view>
+      </view>
+    </view>
+    <view class="tbody">
+      <block wx:for="{{list}}" wx:key="{{index}}">
+        <view class="tr">
+          <view class="td">{{item.nodeFlag}}</view>
+          <view class="td">{{item.nodeName}}</view>
+          <view class="td">
+            <button id="{{item.id}}" bindtap="updateNode">修改</button>
+            <button id="{{item.id}}" bindtap="deleteNode">删除</button>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</block>

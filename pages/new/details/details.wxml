@@ -1,0 +1,359 @@
+<!-- 上刊基本信息 -->
+<view class='issue-info'>
+	<view class="title">
+		<text>上刊基本信息</text>
+	</view>
+	<view class="item">
+		<view class="left">
+			<view class="icon">
+				<image class='images' src="../../../images/icon1.png"></image>
+			</view>
+			<view class="field">
+				<text>{{item.contractName}}</text>
+			</view>
+		</view>
+		<view class="right star-container">
+			<view class="white-star">
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+			</view>
+
+			<view class="star" style="width: {{starWidth}}">
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+			</view>
+		</view>
+	</view>
+	<view class="item">
+		<view class="left">
+			<view class="icon">
+				<image class='images' src="../../../images/icon2.png"></image>
+			</view>
+			<view class="field">
+				<text>{{item.bdid2name}}</text>
+			</view>
+		</view>
+		<view class="rights" bindtap='companyInfo'>
+			<view>
+				<text>资质</text>
+			</view>
+			<view class="arrow">
+				<image src="../../../images/arrow.png"></image>
+			</view>
+		</view>
+	</view>
+	<block wx:if="{{item.publType == '0'}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/icon3.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.mediatype}}</text>
+				</view>
+			</view>
+			<view class="rights" bindtap='mediaInfo'>
+				<view>
+					<text>媒体详情</text>
+				</view>
+				<view class="arrow">
+					<image src="../../../images/arrow.png"></image>
+				</view>
+			</view>
+		</view>
+	</block>
+	<block wx:if="{{item.publType == '1'}}">
+		<view class="item" wx:for="{{item.dwAdvertinstallresourceList}}" wx:key="{{index}}" data-item="{{item}}">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/train.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.trainTypeName}}~{{item.mediacount}}组~{{item.mediatypename}}</text>
+				</view>
+			</view>
+		</view>
+	</block>
+	<view class="item">
+		<view class="left">
+			<view class="icon">
+				<image class='images' src="../../../images/icon4.png"></image>
+			</view>
+			<view class="field">
+				<text>{{item.begindate}} ~ {{item.enddate}} ({{item.datenum}}天 )</text>
+			</view>
+		</view>
+		<view class="right">
+
+		</view>
+	</view>
+	<block wx:if="{{item.publType == '0'}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/icon5.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.properystation}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/icon5.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.medialocation}}</text>
+				</view>
+			</view>
+			<block wx:if="{{item.cmMediaImgList.length>0}}">
+				<view class="rights" bindtap='issueContent'>
+					<view>
+						<text>点位图</text>
+					</view>
+					<view class="arrow">
+						<image src="../../../images/arrow.png"></image>
+					</view>
+				</view>
+			</block>
+		</view>
+	</block>
+	<!-- 广告内容 -->
+	<block wx:if="{{item.advertisingheadlines != null&&item.advertisingheadlines !=''}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/bz.png"></image>
+				</view>
+				<view class="field-content">
+					<text>广告内容: {{item.advertisingheadlines}}</text>
+				</view>
+			</view>
+		</view>
+	</block>
+	<!--备注信息 -->
+	<block wx:if="{{item.remark !=''}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/bz.png"></image>
+				</view>
+				<view class="field-content">
+					<text>备注信息: {{item.remark}}</text>
+				</view>
+			</view>
+		</view>
+	</block>
+
+</view>
+
+<!-- 上刊效果图 -->
+<view class="middle">
+	<block wx:if="{{item.materialImage}}">
+		<view class="title">
+			<text>上刊效果图</text>
+		</view>
+		<swiper indicator-dots="{{true}}" current="0">
+			<block wx:for="{{item.materialImage}}" data-index='{{index}}' data-item="{{item}}">
+				<swiper-item>
+					<block wx:if="{{isMp4[index]}}">
+						<image class="picture" bindtap="imgYu" data-src="{{item}}" src="{{item}}"></image>
+					</block>
+					<block wx:if="{{!isMp4[index]}}">
+						<video src="{{item}}" controls></video>
+					</block>
+				</swiper-item>
+			</block>
+		</swiper>
+	</block>
+	<block wx:else>
+		<view class="title">
+			<text>上刊内容:</text>
+		</view>
+		<view class='advert-content'>{{item.advertisingheadlines}}</view>
+	</block>
+	<!-- 审批意见 -->
+	<view class='opinion'>
+		<text>审批意见</text>
+		<text>代理商已通过线下补充资料,同意审批</text>
+	</view>
+</view>
+<block wx:if="{{roleType == 4}}">
+	<view class="history-logs">
+		<block wx:for="{{history}}" data-item="{{item}}">
+			<!-- 审批历史 -->
+			<view class="history">
+					<view class="history-item">
+						<view class="user">
+							<block wx:if="{{item.journalfunction!='待审批'}}">
+								<view class='circle'>
+									<text>{{item.officeName}}</text>
+									<block wx:if="{{index != 0}}">
+										<view class="vertical-line"></view>
+									</block>
+								</view>
+							</block>
+							<block wx:if="{{item.journalfunction=='待审批'}}">
+								<view class='circle_no'>
+									<text>{{item.officeName}}</text>
+									<block wx:if="{{index != 0}}">
+										<view class="vertical-line"></view>
+									</block>
+								</view>
+							</block>
+							<view class="approve-info">
+								<view class="name">
+									<!-- <text>{{item.journalname}}</text> -->
+									<text>{{item.username}}</text>
+								</view>
+								<view class="status {{item.status == '已驳回' ? 'reject' : ''}}">
+									<text>{{item.journalfunction}}</text>
+								</view>
+							</view>
+						</view>
+						<view class="reason">
+							<view class="time">
+								<text>{{item.journaldate}}</text>
+							</view>
+							<view class="reason-detail">
+								<text>{{item.remark}}</text>
+							</view>
+						</view>
+					</view>
+			</view>
+		</block>
+	</view>
+</block>
+<block wx:else>
+	<view class="history-logs">
+		<block wx:for="{{history}}" data-item="{{item}}">
+			<view class="title">
+				{{item.procesName}}
+			</view>
+			<!-- 审批历史 -->
+			<view class="history">
+				<block wx:for="{{item.logs}}" wx:key="{{index}}">
+					<view class="history-item">
+						<view class="user">
+							<block wx:if="{{item.journalfunction!='待审批'}}">
+								<view class='circle'>
+									<text>{{item.officeName}}</text>
+									<block wx:if="{{index != 0}}">
+										<view class="vertical-line"></view>
+									</block>
+								</view>
+							</block>
+							<block wx:if="{{item.journalfunction=='待审批'}}">
+								<view class='circle_no'>
+									<text>{{item.officeName}}</text>
+									<block wx:if="{{index != 0}}">
+										<view class="vertical-line"></view>
+									</block>
+								</view>
+							</block>
+							<view class="approve-info">
+								<view class="name">
+									<!-- <text>{{item.journalname}}</text> -->
+									<text>{{item.username}}</text>
+								</view>
+								<view class="status {{item.status == '已驳回' ? 'reject' : ''}}">
+									<text>{{item.journalfunction}}</text>
+								</view>
+							</view>
+						</view>
+						<view class="reason">
+							<view class="time">
+								<text>{{item.journaldate}}</text>
+							</view>
+							<view class="reason-detail">
+								<text>{{item.remark}}</text>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</block>
+	</view>
+</block>
+
+
+<!-- 审批历史 -->
+<!-- <view class="history">
+  <block wx:for="{{history}}" wx:key="{{index}}">
+    <view class="history-item">
+      <view class="user">
+        <block wx:if="{{item.journalfunction!='待审批'}}">
+          <view class='circle'>
+            <text>{{item.officeName}}</text>
+            <block wx:if="{{index != 0}}">
+              <view class="vertical-line"></view>
+            </block>
+          </view>
+        </block>
+        <block wx:if="{{item.journalfunction=='待审批'}}">
+          <view class='circle_no'>
+            <text>{{item.officeName}}</text>
+            <block wx:if="{{index != 0}}">
+              <view class="vertical-line"></view>
+            </block>
+          </view>
+        </block>
+        <view class="approve-info">
+          <view class="name">
+            <text>{{item.journalname}}</text>
+            <text>{{item.username}}</text>
+          </view>
+          <view class="status {{item.status == '已驳回' ? 'reject' : ''}}">
+            <text>{{item.journalfunction}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="reason">
+        <view class="time">
+          <text>{{item.journaldate}}</text>
+        </view>
+        <view class="reason-detail">
+          <text>{{item.remark}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view> -->
+
+<!-- 按钮组 -->
+<view class="btns" wx:if="{{item.appstatus == 0}}">
+	<button class="btn-green" id='approve' bindtap='tapBtn'>同意</button>
+	<button class="btn-orange" id='reject' bindtap='tapBtn'>驳回</button>
+</view>
+
+<!-- 审批意见 输入框 -->
+<block wx:if="{{examine}}">
+	<view class="mask" catchtouchmove="preventTouchmove">
+		<view class="examine-model">
+			<view class="examine-model-title">
+				<text>审批意见</text>
+			</view>
+			<view class="examine-model-input">
+				<form>
+					<textarea bindinput='textarea' value='{{approvalOpinion}}'></textarea>
+				</form>
+			</view>
+			<view class="examine-model-btns">
+				<view bindtap="noApprove">
+					<text>取消</text>
+				</view>
+				<view class="short-line"></view>
+				<view bindtap="doApprove">
+					<text>确定</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</block>

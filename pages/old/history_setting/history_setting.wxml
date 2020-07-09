@@ -1,0 +1,94 @@
+<view class="condition">
+  <view class="date">
+    <view class="label">
+      <text>创建日期:</text>
+    </view>
+    <picker
+        mode="date"
+        value="{{startDate}}"
+        start=""
+        end=""
+        bindchange="startChange"
+    >
+      <view class="picker">
+        {{startDate}}
+      </view>
+    </picker>
+    <view class="label">
+      <text>至</text>
+    </view>
+    <picker
+        mode="date"
+        value="{{endDate}}"
+        start=""
+        end=""
+        bindchange="endChange"
+    >
+      <view class="picker">
+        {{endDate}}
+      </view>
+    </picker>
+  </view>
+  <view class="module-type">
+    <view class="label">
+      <text>模块类型:</text>
+    </view>
+    <picker 
+        id="end"
+        value="{{index}}"
+        range="{{typeList}}"
+        bindchange="pickerChange"
+    >
+      <view class="picker" data-type="end">
+       {{typeList[index]}}
+      </view>
+    </picker>
+  </view>
+</view>
+
+<view class="table create">
+  <view class="title">
+    <text>创建信息</text>
+  </view>
+  <view class="thead">
+    <view class="tr">
+      <view class="td">业务表单号</view>
+      <view class="td">创建人</view>
+      <view class="td wide40">创建时间</view>
+    </view>
+  </view>
+  <view class="tbody">
+    <block wx:for="{{createInfo}}">
+      <view class="tr">
+        <view class="td">{{item[0]}}</view>
+        <view class="td">{{item[1]}}</view>
+        <view class="td wide40">{{item[2]}}</view>
+      </view>
+    </block>
+  </view>
+</view>
+
+<view class="table node">
+  <view class="title">
+    <text>创建信息</text>
+  </view>
+  <view class="thead">
+    <view class="tr">
+      <view class="td">审批环节</view>
+      <view class="td">审批人</view>
+      <view class="td wide20">业务表单号</view>
+      <view class="td wide30">备注</view>
+    </view>
+  </view>
+  <view class="tbody">
+    <block wx:for="{{createInfo}}">
+      <view class="tr">
+        
+        <view class="td">{{item[3]}}</view>
+        <view class="td">{{item[4]}}</view>
+        <view class="td wide20">{{item[5]}}</view>
+        <view class="td wide30">{{item[6]}}</view>
+      </view>
+    </block>
+  </view>
+</view>

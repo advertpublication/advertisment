@@ -1,0 +1,147 @@
+<!-- 详情 -->
+<view class='header'>
+  <view class="picture">
+    <image class="image" src="{{item.imgurl}}"></image>
+  </view>
+  <scroll-view scroll-y class="info">
+    <view class='info-first'>
+      <!-- 上刊编号 -->
+      <view class='column'>
+        <text>上刊编号:</text>
+        <text>{{item.previousno}}</text>
+      </view>
+
+      <!-- 上刊类型 -->
+      <view class='column'>
+        <text>上刊类型:</text>
+        <text>{{item.publType}}</text>
+      </view>
+
+      <!-- 客户名称 -->
+      <view class='column'>
+        <text>客户名称:</text>
+        <text>{{item.contractName}}</text>
+      </view>
+
+      <!-- 所属单位 -->
+      <view class='column'>
+        <text>所属单位:</text>
+        <text>{{item.properystation}}</text>
+      </view>
+
+      <!-- 媒体类型 -->
+      <view class='column'>
+        <text>媒体类型:</text>
+        <text>{{item.mediatype}}</text>
+      </view>
+
+      <!-- 广告投放企业 -->
+      <view class='column'>
+        <text>广告投放企业:</text>
+        <text>{{item.bdid2name}}</text>
+      </view>
+
+      <!-- 广告所属行业 -->
+      <view class='column'>
+        <text>广告所属行业:</text>
+        <text>{{item.firstclassification}}</text>
+      </view>
+
+      <!-- 广告所属行业细分 -->
+      <view class='column'>
+        <text>广告所属行业细分:</text>
+        <text>{{item.secondclassification}}</text>
+      </view>
+
+      <!-- 广告素材类型 -->
+      <view class='column'>
+        <text>广告素材类型:</text>
+        <text>{{item.advertMaterial}}</text>
+      </view>
+
+      <!-- 媒体数量 -->
+      <view class='column'>
+        <text>媒体数量:</text>
+        <text>{{item.mcount}}</text>
+      </view>
+
+      <!-- 施工方式 -->
+      <view class='column'>
+        <text>施工方式:</text>
+        <block wx:if="{{item.construcType=='0'}}">
+          <text>按上刊施工</text>
+        </block>
+        <block wx:if="{{item.construcType=='1'}}">
+          <text>按媒体施工</text>
+        </block>
+      </view>
+
+      <!-- 广告内容描述 -->
+      <view class='column'>
+        <text>广告内容描述:</text>
+        <text>{{item.remark}}</text>
+      </view>
+
+      <!-- 上刊起始日期 -->
+      <view class='column'>
+        <text>上刊起始日期:</text>
+        <text>{{item.begindate}}</text>
+      </view>
+
+      <!-- 上刊结束时间 -->
+      <view class='column'>
+        <text>上刊结束时间:</text>
+        <text>{{item.enddate}}</text>
+      </view>
+
+      <!-- 期限 -->
+      <view class='column'>
+        <text>上刊期限:</text>
+        <text>{{item.datenum}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<!-- 受理人 申请 按钮组 -->
+<block wx:if="{{business == 'proposer-apply'}}">
+  <view class="btns apply-btns">
+    <block wx:if="{{item.acceptancestatus=='0'}}">
+      <button class="btn-green" id='accept' bindtap='parameterUP'>上刊受理</button>
+    </block>
+    <block wx:if="{{item.flowstatus=='0'}}">
+      <button class="btn-blue" bindtap="toSubmit">提交审批</button>
+    </block>
+    <block wx:if="{{item.acceptancestatus=='0'}}">
+      <button id='deny' bindtap='parameterUP' class="btn-grey">驳回申请</button>
+    </block>
+  </view>
+</block>
+
+<!-- 受理人 审核 按钮组 -->
+<block wx:if="{{business == 'proposer-check'}}">
+  <view class="btns check-btns">
+    <block wx:if="{{item.flowstatus=='1'||item.flowstatus=='3'}}">
+      <button id='revoke' bindtap='parameterUP' class="btn-green">撤销</button>
+    </block>
+    <block wx:if="{{item.nodeFlag=='flow_node_1'&&item.flowstatus=='3'}}">
+      <button id='returns' bindtap='examine' class="btn-grey">提交审批</button>
+    </block>
+  </view>
+</block>
+
+<!-- 审核人 审批 按钮组 -->
+<block wx:if="{{business == 'verifier-approve'}}">
+  <view class="btns apply-btns">
+    <button class="btn-green" id='approve' bindtap='examine'>同意</button>
+    <button class="btn-blue" id='reject' bindtap='examine'>驳回</button>
+    <button class="btn-grey" id='reject-back' bindtap='examine'>驳回上一级</button>
+  </view>
+</block>
+
+<!-- 审核 日志 按钮组 -->
+<!-- <block wx:if="{{role == 'log'}}">
+  <view class="btns check">
+    <button class="btn-grey">返回</button>
+  </view>
+</block> -->
