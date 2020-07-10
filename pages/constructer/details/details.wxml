@@ -334,6 +334,7 @@
 						</picker>
 					</view>
 				</view>
+         
 				<!-- 流程复选框 -->
 				<view class="examine-model-input-1" wx:for='{{selectConsUserId}}'>
 					<text>施工人员:</text>

@@ -362,6 +362,7 @@ Page({
     //   })
     //   return;
     // }
+    
 
     //确定施工分配
     let url = CONS_DIS_URL;

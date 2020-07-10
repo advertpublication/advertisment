@@ -8,7 +8,7 @@
   color: rgba(0, 0, 0, 0.9);
   line-height: 30rpx;
 }
-
+  
 /* 基本信息 */
 
 .item {
