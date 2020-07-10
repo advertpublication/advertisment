@@ -1,0 +1,598 @@
+<!-- 上刊基本信息 -->
+<view class='issue-info'>
+  <view class="title">
+    <text>上刊基本信息</text>
+  </view>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon1.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.contractname}}</text>
+      </view>
+    </view>
+    <view class="right star-container">
+      <view class="white-star">
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+      </view>
+
+      <view class="star" style="width: {{starWidth}}">
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon2.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.bdid2name}}</text>
+      </view>
+    </view>
+    <view class="rights" bindtap='companyInfo'>
+      <view>
+        <text>资质</text>
+      </view>
+      <view class="arrow">
+        <image src="../../../images/arrow.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <block wx:if="{{item.publType == '0'}}">
+    <view class="item">
+      <view class="left">
+        <view class="icon">
+          <image class='images' src="../../../images/icon3.png"></image>
+        </view>
+        <view class="field">
+          <text>{{item.mtype}}</text>
+        </view>
+      </view>
+      <view class="rights" bindtap='mediaInfo'>
+        <view>
+          <text>媒体详情</text>
+        </view>
+        <view class="arrow">
+          <image src="../../../images/arrow.png"></image>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{item.publType == '1'}}">
+    <view class="item" wx:for="{{item.dwAdvertinstallresourceList}}" wx:key="{{index}}" data-item="{{item}}">
+      <view class="left">
+        <view class="icon">
+          <image class='images' src="../../../images/train.png"></image>
+        </view>
+        <view class="field">
+          <text>{{item.trainTypeName}}~{{item.mediacount}}组~{{item.mediatypename}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon4.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.uptime}} ~ {{item.downtime}}</text>
+      </view>
+    </view>
+    <view class="right">
+    </view>
+  </view>
+  <block wx:if="{{item.publType == '0'}}">
+    <view class="item">
+      <view class="left">
+        <view class="icon">
+          <image class='images' src="../../../images/icon5.png"></image>
+        </view>
+        <view class="field">
+          <text>{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="item">
+      <view class="left">
+        <view class="icon">
+          <image class='images' src="../../../images/icon5.png"></image>
+        </view>
+        <view class="field">
+          <text>{{item.medialocation}}</text>
+        </view>
+      </view>
+      <block wx:if="{{item.cmMediaImgList.length>0}}">
+        <view class="rights" bindtap='issueContent'>
+          <view>
+            <text>点位图</text>
+          </view>
+          <view class="arrow">
+            <image src="../../../images/arrow.png"></image>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+  <!-- 广告内容 -->
+  <block wx:if="{{item.advertisingheadlines != null&&item.advertisingheadlines !=''}}">
+    <view class="item">
+      <view class="left">
+        <view class="icon">
+          <image class='images' src="../../../images/bz.png"></image>
+        </view>
+        <view class="field-content">
+          <text>广告内容: {{item.advertisingheadlines}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+  <!--备注信息 -->
+  <block wx:if="{{item.remarks !=''}}">
+    <view class="item">
+      <view class="left">
+        <view class="icon">
+          <image class='images' src="../../../images/bz.png"></image>
+        </view>
+        <view class="field-content">
+          <text>备注信息: {{item.remarks}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<!-- 上刊效果图 -->
+<view class="middle">
+  <block wx:if="{{item.materiallist}}">
+    <view class="title">
+      <text>上刊效果图</text>
+    </view>
+    <swiper indicator-dots="{{true}}" current="0">
+      <block wx:for="{{item.materiallist}}" data-index='{{index}}' data-item="{{item}}">
+        <swiper-item>
+          <block wx:if="{{isMp4[index]}}">
+            <image class="picture" bindtap="previewImage" data-src="{{commonPath}}/{{item.belongdoc}}/{{item.filename}}" src="{{commonPath}}/{{item.belongdoc}}/{{item.filename}}"></image>
+          </block>
+          <block wx:if="{{!isMp4[index]}}">
+            <video src="{{item.filename}}" controls></video>
+          </block>
+        </swiper-item>
+      </block>
+    </swiper>
+  </block>
+  <block wx:else>
+    <view class="title">
+      <text>上刊内容:</text>
+    </view>
+    <view class='advert-content'>{{item.advertisingheadlines}}</view>
+  </block>
+</view>
+
+<!-- 审批历史 -->
+<block wx:if="{{history.length>0}}">
+  <block wx:if="{{roleType == 4}}">
+    <view class="history-logs">
+      <block wx:for="{{history}}" data-item="{{item}}">
+        <!-- 审批历史 -->
+        <view class="history">
+          <view class="history-item">
+            <view class="user">
+              <block wx:if="{{item.journalfunction!='待审批'}}">
+                <view class='circle'>
+                  <text>{{item.officeName}}</text>
+                  <block wx:if="{{index != 0}}">
+                    <view class="vertical-line"></view>
+                  </block>
+                </view>
+              </block>
+              <block wx:if="{{item.journalfunction=='待审批'}}">
+                <view class='circle_no'>
+                  <text>{{item.officeName}}</text>
+                  <block wx:if="{{index != 0}}">
+                    <view class="vertical-line"></view>
+                  </block>
+                </view>
+              </block>
+              <view class="approve-info">
+                <view class="name">
+                  <!-- <text>{{item.journalname}}</text> -->
+                  <text>{{item.username}}</text>
+                </view>
+                <view class="status {{item.status == '已驳回' ? 'reject' : ''}}">
+                  <text>{{item.journalfunction}}</text>
+                </view>
+              </view>
+            </view>
+            <view class="reason">
+              <view class="time">
+                <text>{{item.journaldate}}</text>
+              </view>
+              <view class="reason-detail">
+                <text>{{item.remark}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="history-logs">
+      <block wx:for="{{history}}" data-item="{{item}}">
+        <view class="title">
+          {{item.procesName}}
+        </view>
+        <!-- 审批历史 -->
+        <view class="history">
+          <block wx:for="{{item.logs}}" wx:key="{{index}}">
+            <view class="history-item">
+              <view class="user">
+                <block wx:if="{{item.journalfunction!='待审批'}}">
+                  <view class='circle'>
+                    <text>{{item.officeName}}</text>
+                    <block wx:if="{{index != 0}}">
+                      <view class="vertical-line"></view>
+                    </block>
+                  </view>
+                </block>
+                <block wx:if="{{item.journalfunction=='待审批'}}">
+                  <view class='circle_no'>
+                    <text>{{item.officeName}}</text>
+                    <block wx:if="{{index != 0}}">
+                      <view class="vertical-line"></view>
+                    </block>
+                  </view>
+                </block>
+                <view class="approve-info">
+                  <view class="name">
+                    <!-- <text>{{item.journalname}}</text> -->
+                    <text>{{item.username}}</text>
+                  </view>
+                  <view class="status {{item.status == '已驳回' ? 'reject' : ''}}">
+                    <text>{{item.journalfunction}}</text>
+                  </view>
+                </view>
+              </view>
+              <view class="reason">
+                <view class="time">
+                  <text>{{item.journaldate}}</text>
+                </view>
+                <view class="reason-detail">
+                  <text>{{item.remark}}</text>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+  </block>
+</block>
+
+<!-- <view class="approving-blue" wx:if="{{item.dwconstruction!=null && item.conditionType ==3 && item.flowstatus2 ==2 && item.acceptancestatus =='1'}}">
+        <text>已上刊</text>
+      </view> -->
+<block wx:elif="{{item.buildstatus == '1'}}">
+  <view class="result">
+    <view class="title">
+      <text>施工结果说明</text>
+    </view>
+    <view class="input-explain">
+      <textarea placeholder="请输入施工说明" value="{{item.remarks}}"></textarea>
+    </view>
+    <view class="photo-list">
+      <block wx:for="{{item.buildImage}}" wx:key="{{index}}">
+        <view class="photo">
+          <image src="{{item}}" data-src="{{item}}" bindtap="previewPhoto"></image>
+          <!-- <view class="delete-photo" data-index="{{index}}" catchtap="deletePhoto">
+          <image src="../../../images/3.png"></image>
+        </view> -->
+        </view>
+      </block>
+      <!-- <view class="photo add-photo" bindtap="addPhoto">
+      <image src="../../../images/add.png"></image>
+    </view> -->
+    </view>
+  </view>
+</block>
+
+<view class='middle-bottom' wx:if="{{item.acceptancestatus=='0' && roleType ==1 }}">
+  <view class="btns">
+    <button class="btn-green" id='approve' bindtap='agree'>同意申请</button>
+    <button class="btn-red" id='reject' bindtap='reject'>驳回申请</button>
+    <button class="btn-orange" id='back' bindtap='back'>返回</button>
+  </view>
+</view>
+<!-- 结束初审 -->
+<view class='middle-bottom' wx:if="{{item.acceptancestatus =='1' && item.flowstatus =='1' && roleType ==1}}">
+  <view class="btns">
+    <button class="btn-red" id='reject' bindtap='endInner'>结束初审</button>
+    <button class="btn-orange" id='back' bindtap='back'>返回</button>
+  </view>
+</view>
+<!-- 结束审核-->
+<view class='middle-bottom' wx:if="{{item.acceptancestatus =='1' && item.flowstatus2 =='1' && roleType ==1}}">
+  <view class="btns">
+    <button class="btn-red" id='reject' bindtap='endOuter'>结束审核</button>
+    <button class="btn-orange" id='back' bindtap='back'>返回</button>
+  </view>
+</view>
+<!--转施工 -->
+<block wx:if="item.flowstatus == 2 && item.acceptancestatus =='1' && roleType ==1">
+  <block wx:if="{{constructionApproval == 0}}">
+    <view class='middle-bottom' wx:if="{{item.flowstatus3 ==2 && item.dwconstruction==null}}">
+      <view class="btns">
+        <!-- <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}"> -->
+        <view class="filter">
+          <button class="btn-green" id='reject' bindtap='saveConsDist'>转施工</button>
+        </view>
+        <!-- </picker> -->
+        <button class="btn-orange" id='back' bindtap='back'>返回</button>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{constructionApproval == 1 && item.publType == '0'}}">
+    <view class='middle-bottom' wx:if="{{item.flowstatus2 =='2' && item.dwconstruction==null}}">
+      <view class="btns">
+        <!-- <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}"> -->
+        <view class="filter">
+          <button class="btn-green" id='reject' bindtap='saveConsDist'>转施工</button>
+        </view>
+        <!-- </picker> -->
+        <button class="btn-orange" id='back' bindtap='back'>返回</button>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{item.publType == '1'}}">
+    <view class='middle-bottom' wx:if="{{item.flowstatus2 =='2' && item.dwconstruction==null}}">
+      <view class="btns">
+        <!-- <view class="filter">
+            <button class="btn-green" id='reject' bindtap='toBuildTrain'>转施工</button>
+          </view> -->
+        <!-- <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}"> -->
+        <view class="filter">
+          <button class="btn-green" id='reject' bindtap='saveConsDist'>转施工</button>
+        </view>
+        <!-- </picker> -->
+        <button class="btn-orange" id='back' bindtap='back'>返回</button>
+      </view>
+    </view>
+  </block>
+</block>
+<!--施工分配弹出框-->
+<block wx:if="{{distribution}}">
+  <view class="mask" catchtouchmove="preventTouchmove">
+    <view class="examine-model-yes1">
+      <view class="examine-model-title">
+        <text>转施工人员</text>
+      </view>
+      <scroll-view scroll-y="true" style="height: 260rpx;">
+        <view class="examine-model-input">
+          <view class="distribution-list" wx:for='{{DistributionData}}'>
+            <picker mode="multiSelector" bindchange="citySure" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+              <view class="select-box" style='width:90%;float:left'>
+                <!-- {{areaInfo[index]}} -->
+                <input class="input" value="{{areaInfo[index]}}" bindfocus='changeInput' data-index='{{index}}' placeholder=" 请输入人员" />
+              </view>
+            </picker>
+            <text wx:if='{{DistributionData.length-1 == index}}' class='iconfont' bindtap="addDistribution">+</text>
+            <text wx:else class='iconfont ' data-index="{{index}}" bindtap="delDistribution">-</text>
+          </view>
+
+        </view>
+      </scroll-view>
+      <view class="examine-model-btns">
+        <view bindtap="closeDistribution">
+          <text>取消</text>
+        </view>
+        <view class="short-line"></view>
+        <view bindtap="SubmitDistribution">
+          <text>提交</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+<!-- 转施工审批 -->
+<view class='middle-bottom' wx:if="{{item.acceptancestatus =='1' && item.flowstatus ==2 && item.flowstatus2 =='2' && roleType ==1 && item.dwconstruction==null && item.flowstatus3 == '0' && constructionApproval == 0 && item.publType == '0'}}">
+  <view class="btns">
+    <button class="btn-green" id='reject' bindtap='toBuildApproval'>转施工申请</button>
+    <button class="btn-orange" id='back' bindtap='back'>返回</button>
+  </view>
+</view>
+<view class='middle-bottom' wx:if="{{item.acceptancestatus =='1' && item.flowstatus ==2 && item.flowstatus2 =='2' && roleType ==1 && item.dwconstruction==null && item.flowstatus3 == '3' && constructionApproval == 0 && item.publType == '0'}}">
+  <view class="btns">
+    <button class="btn-green" id='reject' bindtap='toBuildApprovalagain'>转施工申请</button>
+    <button class="btn-orange" id='back' bindtap='back'>返回</button>
+  </view>
+</view>
+<view class='middle-bottom' wx:if="{{item.acceptancestatus =='1'  &&  item.flowstatus3 == '1' && roleType ==1 && constructionApproval == 0}}">
+  <view class="btns">
+    <button class="btn-red-1" id='back' bindtap='endBuild'>结束转施工审批</button>
+    <button class="btn-orange" id='back' bindtap='back'>返回</button>
+  </view>
+</view>
+<!-- 同意受理 -->
+<block wx:if="{{examineyes}}">
+  <view class="mask" catchtouchmove="preventTouchmove">
+    <view class="examine-model-yes">
+      <view class="examine-model-title">
+        <text>同意申请</text>
+      </view>
+      <view class="examine-model-input">
+        <view class="examine-model-input-1">
+          <text>流程名称:</text>
+          <!-- 流程下拉框 -->
+          <view class='list-msg2'>
+            <block wx:for="{{selectArray}}" wx:item="item">
+              <view class="checkbox-item">
+                <block wx:if="{{item.deafultFlag == 0 && item.delState==0}}">
+                  <checkbox value="{{item.approvalProcessName}}" checked="checked" />{{item.approvalProcessName}}
+                </block>
+              </view>
+            </block>
+            <!-- <Select prop-array='{{selectArray}}' bind:myget='getDate'></Select> -->
+          </view>
+        </view>
+        <!-- 流程复选框 -->
+        <checkbox-group class="group" bindchange="checkboxChange">
+          <block wx:for="{{checkitems}}" wx:item="item">
+            <view>
+              <checkbox value="{{item.name}}" checked="{{item.checked}}" color="{{item.color}}" disabled="{{item.disabled}}" />{{item.value}}
+            </view>
+          </block>
+        </checkbox-group>
+      </view>
+      <view class="examine-model-btns">
+        <view bindtap="noApprove">
+          <text>取消</text>
+        </view>
+        <view class="short-line"></view>
+        <view bindtap="doApprove">
+          <text>确定</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!-- 审批意见 输入框 -->
+<block wx:if="{{examine}}">
+  <view class="mask" catchtouchmove="preventTouchmove">
+    <view class="examine-model">
+      <view class="examine-model-title">
+        <text>驳回意见</text>
+      </view>
+      <view class="examine-model-input">
+        <form>
+          <textarea bindinput='textarea' value='{{approvalOpinion}}'></textarea>
+        </form>
+      </view>
+      <view class="examine-model-btns">
+        <view bindtap="noApprove">
+          <text>取消</text>
+        </view>
+        <view class="short-line"></view>
+        <view bindtap="doReject">
+          <text>确定</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!-- 结束内审意见 输入框 -->
+<block wx:if="{{innerexamine}}">
+  <view class="mask" catchtouchmove="preventTouchmove">
+    <view class="examine-model">
+      <view class="examine-model-title">
+        <text>结束初审意见</text>
+      </view>
+      <view class="examine-model-input">
+        <form>
+          <textarea bindinput='textarea' value='{{approvalOpinion}}'></textarea>
+        </form>
+      </view>
+      <view class="examine-model-btns">
+        <view bindtap="noInnerApprove">
+          <text>取消</text>
+        </view>
+        <view class="short-line"></view>
+        <view bindtap="doInnerReject">
+          <text>确定</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!-- 结束外审意见 输入框 -->
+<block wx:if="{{outerexamine}}">
+  <view class="mask" catchtouchmove="preventTouchmove">
+    <view class="examine-model">
+      <view class="examine-model-title">
+        <text>结束审核意见</text>
+      </view>
+      <view class="examine-model-input">
+        <form>
+          <textarea bindinput='textarea' value='{{approvalOpinion}}'></textarea>
+        </form>
+      </view>
+      <view class="examine-model-btns">
+        <view bindtap="noOuterApprove">
+          <text>取消</text>
+        </view>
+        <view class="short-line"></view>
+        <view bindtap="doOuterReject">
+          <text>确定</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!-- 转施工审批 -->
+<block wx:if="{{examinebuild}}">
+  <view class="mask" catchtouchmove="preventTouchmove">
+    <view class="examine-model-yes">
+      <view class="examine-model-title">
+        <text>施工审批</text>
+      </view>
+      <view class="examine-model-input">
+        <view class="examine-model-input-2">
+          <text>流程名称:</text>
+          <!-- 流程下拉框 -->
+          <view class='list-msg2' bindtap='bindShowMsg'>
+            <Select prop-array='{{selectArray}}' bind:myget='getDate'></Select>
+          </view>
+        </view>
+      </view>
+      <view class="examine-model-btns">
+        <view bindtap="noBuildApproval">
+          <text>取消</text>
+        </view>
+        <view class="short-line"></view>
+        <view bindtap="doBuildApproval">
+          <text>确定</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!-- 结束施工申请 -->
+<block wx:if="{{endbuildexamine}}">
+  <view class="mask" catchtouchmove="preventTouchmove">
+    <view class="examine-model">
+      <view class="examine-model-title">
+        <text>结束转施工审批意见</text>
+      </view>
+      <view class="examine-model-input">
+        <form>
+          <textarea bindinput='textarea' value='{{approvalOpinion}}'></textarea>
+        </form>
+      </view>
+      <view class="examine-model-btns">
+        <view bindtap="noEndBuild">
+          <text>取消</text>
+        </view>
+        <view class="short-line"></view>
+        <view bindtap="doEndBuild">
+          <text>确定</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>

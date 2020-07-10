@@ -1,0 +1,159 @@
+<view class="swiper-header">
+  <view class="{{current == 0 ? 'active' : ''}}" data-current="0" bindtap="swipe">
+    <text>申请单</text>
+  </view>
+  <view class="{{current == 1 ? 'active' : ''}}" data-current="1" bindtap="swipe">
+    <text>审核表</text>
+  </view>
+</view>
+<swiper current="{{current}}" bindchange="swiperChange">
+  <swiper-item class="swiper-item">
+    <!-- 申请图片 -->
+    <view class="content">
+      <view class="picture">
+        <image class="image" src="{{item.imgurl}}"></image>
+      </view>
+      <scroll-view scroll-y>
+        <view class='info-first'>
+          <!-- 上刊编号 -->
+          <view class='column'>
+            <text>上刊编号:</text>
+            <text>{{item.previousno}}</text>
+          </view>
+
+          <!-- 上刊类型 -->
+          <view class='column'>
+            <text>上刊类型:</text>
+            <text>{{item.publType}}</text>
+          </view>
+
+          <!-- 客户名称 -->
+          <view class='column'>
+            <text>客户名称:</text>
+            <text>{{item.contractName}}</text>
+          </view>
+
+          <!-- 所属单位 -->
+          <view class='column'>
+            <text>所属单位:</text>
+            <text>{{item.properystation}}</text>
+          </view>
+
+          <!-- 媒体类型 -->
+          <view class='column'>
+            <text>媒体类型:</text>
+            <text>{{item.mediatype}}</text>
+          </view>
+
+          <!-- 广告投放企业 -->
+          <view class='column'>
+            <text>广告投放企业:</text>
+            <text>{{item.bdid2name}}</text>
+          </view>
+
+          <!-- 广告所属行业 -->
+          <view class='column'>
+            <text>广告所属行业:</text>
+            <text>{{item.firstclassification}}</text>
+          </view>
+
+          <!-- 广告所属行业细分 -->
+          <view class='column'>
+            <text>广告所属行业细分:</text>
+            <text>{{item.secondclassification}}</text>
+          </view>
+
+          <!-- 广告素材类型 -->
+          <view class='column'>
+            <text>广告素材类型:</text>
+            <text>{{item.advertMaterial}}</text>
+          </view>
+
+          <!-- 媒体数量 -->
+          <view class='column'>
+            <text>媒体数量:</text>
+            <text>{{item.mcount}}</text>
+          </view>
+
+          <!-- 施工方式 -->
+          <view class='column'>
+            <text>施工方式:</text>
+            <block wx:if="{{item.construcType=='0'}}">
+              <text>按上刊施工</text>
+            </block>
+            <block wx:if="{{item.construcType=='1'}}">
+              <text>按媒体施工</text>
+            </block>
+          </view>
+
+          <!-- 广告内容描述 -->
+          <view class='column'>
+            <text>广告内容描述:</text>
+            <text>{{item.remark}}</text>
+          </view>
+
+          <!-- 上刊起始日期 -->
+          <view class='column'>
+            <text>上刊起始日期:</text>
+            <text>{{item.begindate}}</text>
+          </view>
+
+          <!-- 上刊结束时间 -->
+          <view class='column'>
+            <text>上刊结束时间:</text>
+            <text>{{item.enddate}}</text>
+          </view>
+
+          <!-- 期限 -->
+          <view class='column'>
+            <text>上刊期限:</text>
+            <text>{{item.datenum}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </swiper-item>
+  <swiper-item class="swiper-item">
+    <!-- 审核列表 -->
+    <!-- <block wx:if="{{log.length > 0}}"> -->
+    <view class="table">
+      <view class="thead">
+        <view class="tr">
+          <view class="td">序号</view>
+          <view class="td">操作人</view>
+          <view class="td">操作日期</view>
+          <view class="td">操作项</view>
+        </view>
+      </view>
+      <view class="tbody">
+        <!-- <block wx:for="{{log}}" wx:key="{{index}}">
+            <view class="tr">
+              <view class="td">{{index + 1}}</view>
+              <view class="td">{{item.journalname}}</view>
+              <view class="td">{{item.journaldate}}</view>
+              <view class="td">{{item.journalfunction}}</view>
+            </view>
+          </block> -->
+        <view class="tr">
+          <view class="td">1</view>
+          <view class="td">张三</view>
+          <view class="td">2019-03-20</view>
+          <view class="td">不知道写啥</view>
+        </view>
+        <view class="tr">
+          <view class="td">1</view>
+          <view class="td">张三</view>
+          <view class="td">2019-03-20</view>
+          <view class="td">不知道写啥</view>
+        </view>
+        <view class="tr">
+          <view class="td">1</view>
+          <view class="td">张三</view>
+          <view class="td">2019-03-20</view>
+          <view class="td">不知道写啥</view>
+        </view>
+      </view>
+    </view>
+    <!-- </block> -->
+  </swiper-item>
+</swiper>

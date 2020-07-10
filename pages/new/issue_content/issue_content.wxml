@@ -1,0 +1,11 @@
+<view class="info">
+  <view class="header">
+    <swiper indicator-dots="{{true}}" current="0">
+      <block wx:for="{{imag_urls}}" data-item="{{item}}">
+        <swiper-item>
+          <image class="picture" bindtap="imgYu" data-src="{{item.fileName}}" src="{{item.fileName}}"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>

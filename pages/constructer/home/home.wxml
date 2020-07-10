@@ -1,0 +1,158 @@
+<!-- header -->
+<wxs module="filter" src="../../constructer/details/details.wxs"></wxs>
+<scroll-view>
+  <view class="header">
+    <!-- <picker mode="multiSelector" bindchange="pickerChange" value="{{pickerIndex}}" range="{{pickerArray}}" range-key="name">
+      <view class="filter">
+        <view class="icon">
+          <image src="../../../images/location_icon.png"></image>
+        </view>
+        <view class='pick'>
+          <text>{{station.name}}</text>
+          <text class='three'></text>
+        </view>
+      </view>
+    </picker> -->
+     <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="filter">
+        <view class="icon">
+          <image src="../../../images/location_icon.png"></image>
+        </view>
+        <view class='pick'>
+          <text>{{multiArray[0][multiIndex[0]]}}</text>
+          <text class='three'></text>
+        </view>
+      </view>
+    </picker>
+    <view class='search-box'>
+      <input type="text" value="{{input}}" placeholder="投放企业、品牌、行业" class='search' placeholder-class="placeholder" bindinput="doInput">
+      </input>
+      <image class="image" src="../../../images/shouye-sousuo.png"></image>
+    </view>
+    <!-- </view> -->
+  </view>
+  <view class='container'>
+    <view class="tips" wx:if="{{list.length==0}}">
+      <text>当前没有施工分配记录</text>
+    </view>
+   <!-- <view class="tips" wx:if="{{buildingcount>0}}">
+      <text>你当前共有{{buildingcount}}个上刊施工待分配, 请注意查阅</text>
+    </view> -->
+    <view class="tips" wx:if="{{buildingcount>0}}">
+      <text>你当前共有{{total}}个上刊项, 请注意查阅</text>
+    </view>
+    <!-- 审批列表 -->
+    <view class="list">
+      <block wx:for="{{list}}" wx:key="{{index}}" wx:if="{{item.consDisStatus == '0'}}">
+        <view class="item" data-id="{{item.id}}" data-previousno="{{item.previousno}}" data-item="{{item}}" bindtap="toDetail">
+          <view>
+            <block wx:if="{{filter.isVedio(item.materiallist[0])}}">
+             <video class="image" src="{{item.materiallist[0]}}" controls></video>
+          </block>
+          <block wx:else>
+               <image class="image" src="{{item.materiallist[0]}}"></image>
+          </block>
+          </view>
+          <view class="info">
+            <block wx:if="{{item.publType == '0'}}">
+              <text class="station">{{item.address}}-{{item.medialocation}}</text>
+            </block>
+            <block wx:if="{{item.publType == '1'}}">
+              <text class="station">{{filter.beautySub(item.trainInfo,20)}}</text>
+            </block>
+            <text class="range">{{item.uptime}}~{{item.downtime}}({{item.datenum}}天)</text>
+            <view class="position">
+              <text>{{item.mtype}}</text>
+            </view>
+            <text class="company">{{item.bdid2name}}</text>
+          </view>
+          <block wx:if="{{!item.dwAdvertinstallresourceList[0].constructionName}}">
+             <view class="approving">
+              <text>待分配</text>
+             </view>
+          </block>
+          <block wx:if="{{constructionStationFlag == '0' && item.publType == '0' && item.dwAdvertinstallresourceList[0].constructionName && item.negotiationState != '0' && !item.buildImage}}">
+		        <view class="approving">
+              <text>待施工</text>
+             </view>
+	        </block>
+            <block wx:if="{{constructionStationFlag == '0' && item.publType == '0' && item.dwAdvertinstallresourceList[0].constructionName && item.negotiationState != '0' && item.buildImage.length>0}}">
+		        <view class="approving">
+              <text>施工中</text>
+             </view>
+	        </block>
+         <block wx:if="{{constructionStationFlag == '0' && item.negotiationState=='0'}}">
+		        <view class="approving">
+              <text>洽谈中</text>
+             </view>
+	        </block>
+        </view>
+      </block>
+
+      <!-- <view class="tips" wx:if="{{total-buildingcount>0}}">
+        <text>你当前共有{{total-buildingcount}}个施工已分配, 请注意查阅</text>
+      </view> -->
+      <block wx:for="{{list}}" wx:key="{{index}}" wx:if="{{item.consDisStatus == '1'}}">
+        <view class="item" data-id="{{item.id}}" data-previousno="{{item.previousno}}" data-item="{{item}}" bindtap="toDetail">
+          <view>
+            <block wx:if="{{filter.isVedio(item.materiallist[0])}}">
+             <video class="image" src="{{item.materiallist[0]}}" controls></video>
+          </block>
+          <block wx:else>
+               <image class="image" src="{{item.materiallist[0]}}"></image>
+          </block>
+          </view>
+          <view class="info">
+            <block wx:if="{{item.publType == '0'}}">
+              <text class="station">{{item.address}}-{{item.medialocation}}</text>
+            </block>
+            <block wx:if="{{item.publType == '1'}}">
+              <text class="station">{{filter.beautySub(item.trainInfo,20)}}</text>
+            </block>
+            <text class="range">{{item.uptime}}~{{item.downtime}}({{item.datenum}}天)</text>
+            <view class="position">
+              <text>{{item.mtype}}</text>
+            </view>
+            <text class="company">{{item.bdid2name}}</text>
+          </view>
+          <!-- <view class="approved">
+            <text>已分配</text>
+          </view> -->
+          <block wx:if="{{item.advertStatus=='0'&& !item.buildImage}}">
+            <view class="approving">
+            <text>待施工</text>
+            </view>
+          </block>
+          <block wx:if="{{item.advertStatus=='0' && item.buildImage.length> 0 && item.buildConfirmStatus == '0'}}">
+            <view class="approving">
+               <text>施工中</text>
+            </view>
+          </block>
+          <block wx:if="{{item.advertStatus=='0' && item.buildImage.length> 0 && item.buildConfirmStatus == '1'}}">
+            <view class="approving">
+               <text>待确认</text>
+            </view>
+          </block>
+          <block wx:if="{{item.advertStatus=='1' && item.buildImage.length > 0}}">
+            <!-- <view class="approved">
+               <text>已施工</text>
+            </view> -->
+            <view class="approved">
+               <text>已上刊</text>
+            </view>
+          </block>
+          <!-- <block wx:if="{{item.negotiationState == '1'}}">
+              <view class="approving">
+               <text>待施工</text>
+            </view>
+          </block> -->
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class='logout'>
+    <view class='user-icon' bindtap="main">
+      <text class='iconfont icon-user'></text>
+    </view>
+  </view>
+</scroll-view>

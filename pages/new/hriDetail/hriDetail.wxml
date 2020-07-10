@@ -1,0 +1,161 @@
+<!-- 上刊基本信息 -->
+<view class='issue-info'>
+  <view class="title">
+    <text>上刊基本信息</text>
+  </view>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon1.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.contractName}}</text>
+      </view>
+    </view>
+    <view class="right star-container">
+      <view class="white-star">
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+        <image src="../../../images/white-star.png"></image>
+      </view>
+
+      <view class="star" style="width: {{starWidth}}">
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+        <image src="../../../images/star.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon2.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.bdid2name}}</text>
+      </view>
+    </view>
+    <view class="right">
+      <view class="arrow" bindtap='companyInfo'>
+        <image src="../../../images/arrow.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon3.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.mediatype}}*{{item.mcount}}</text>
+      </view>
+    </view>
+    <!-- <view class="right">
+         <text>共10个</text>
+    </view> -->
+  </view>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon4.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.begindate}} ~ {{item.enddate}} ({{item.datenum}}天 )</text>
+      </view>
+    </view>
+    <view class="right">
+
+    </view>
+  </view>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon5.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.properystation}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="left">
+      <view class="icon">
+        <image class='images' src="../../../images/icon5.png"></image>
+      </view>
+      <view class="field">
+        <text>{{item.medialocation}}</text>
+      </view>
+    </view>
+    <view class="right">
+      <view class="arrow" bindtap='issueContent'>
+        <image src="../../../images/arrow.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 上刊效果图 -->
+<view class="middle">
+  <view class="title">
+    <text>上刊效果图</text>
+  </view>
+  <swiper indicator-dots="{{true}}" current="0">
+    <block wx:for="{{item.materialImage}}" wx:key="{{index}}" data-item="{{item}}">
+      <swiper-item>
+        <image class="picture" bindtap="imgYu" data-src="{{item}}" src="{{item}}"></image>
+      </swiper-item>
+      <!-- <swiper-item>
+        <image class="picture" src="../../../images/2.png"></image>
+      </swiper-item>
+      <swiper-item>
+        <image class="picture" src="../../../images/3.png"></image>
+      </swiper-item> -->
+    </block>
+  </swiper>
+  <!-- 审批意见 -->
+  <view class='opinion'>
+    <text>审批意见</text>
+    <text>代理商已通过线下补充资料,同意审批</text>
+  </view>
+</view>
+
+<!-- 审批历史 -->
+<view class="history">
+  <block wx:for="{{history}}" wx:key="{{index}}">
+    <view class="history-item">
+      <view class="user">
+        <view class='circle'>
+          <text>{{item.journalname}}</text>
+          <block wx:if="{{index != 0}}">
+            <view class="vertical-line"></view>
+          </block>
+        </view>
+        <view class="approve-info">
+          <view class="name">
+            <text>{{item.journalname}}</text>
+          </view>
+          <view class="status {{item.status == '已驳回' ? 'reject' : ''}}">
+            <text>{{item.journalfunction}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="reason">
+        <view class="time">
+          <text>{{item.journaldate}}</text>
+        </view>
+        <view class="reason-detail">
+          <text>{{item.reason}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<!-- 按钮组 -->
+<view class="btns">
+  <button class="btn-green" id='approve' bindtap='close'>关闭</button>
+</view>

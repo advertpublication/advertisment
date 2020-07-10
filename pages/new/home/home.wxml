@@ -1,0 +1,104 @@
+<!-- header -->
+<wxs module="filter" src="../../constructer/details/details.wxs"></wxs>
+<scroll-view>
+  <view class="header">
+    <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="filter">
+        <view class="icon">
+          <image src="../../../images/location_icon.png"></image>
+        </view>
+        <view class='pick'>
+          <text>{{multiArray[0][multiIndex[0]]}}</text>
+          <text class='three'></text>
+        </view>
+      </view>
+    </picker>
+    <view class='search-box'>
+      <input type="text" value="{{input}}" placeholder="投放企业、品牌、行业" class='search' placeholder-class="placeholder" bindinput="doInput">
+      </input>
+      <image class="image" src="../../../images/shouye-sousuo.png"></image>
+    </view>
+    <!-- </view> -->
+  </view>
+  <view class='container'>
+    <view class="tips" wx:if="{{list.length==0}}">
+      <text>当前没有审批记录</text>
+    </view>
+    <view class="tips" wx:if="{{approvingcount>0}}">
+      <text>你当前共有{{approvingcount}}个上刊待审批, 请注意查阅</text>
+    </view>
+
+    <!-- 审批列表 -->
+    <view class="list">
+      <block wx:for="{{list}}" wx:key="{{index}}" wx:if="{{item.appstatus == '0'}}">
+        <view class="item" data-id="{{item.id}}" data-previousno="{{item.previousno}}" data-item="{{item}}" bindtap="toDetail">
+          <view>
+          <block wx:if="{{filter.isVedio(item.materialImage[0])}}">
+             <video class="image" src="{{item.materialImage[0]}}" controls></video>
+          </block>
+          <block wx:else>
+               <image class="image" src="{{item.materialImage[0]}}"></image>
+          </block>
+          </view>
+          <view class="info">
+            <block wx:if="{{item.publType == '0'}}">
+              <text class="station">{{item.properystation}}-{{item.medialocation}}</text>
+            </block>
+            <block wx:if="{{item.publType == '1'}}">
+              <text class="station">{{filter.beautySub(item.trainInfo,20)}}</text>
+            </block>
+            <text class="range">{{item.begindate}}~{{item.enddate}}({{item.datenum}}天)</text>
+            <view class="position">
+              <text>{{item.mediatype}}</text>
+              <!-- *
+          <text>{{item.mcount}}</text> -->
+            </view>
+            <text class="company">{{filter.beautySub(item.bdid2name,8)}}</text>
+          </view>
+          <view class="approving" wx:if="{{item.appstatus == '0'}}">
+            <text>待审批</text>
+          </view>
+        </view>
+      </block>
+
+      <view class="tips" wx:if="{{total-approvingcount>0}}">
+        <text>你当前共有{{total-approvingcount}}个上刊已审批, 请注意查阅</text>
+      </view>
+      <block wx:for="{{list}}" wx:key="{{index}}" wx:if="{{item.appstatus == '1'}}">
+        <view class="item" data-id="{{item.id}}" data-previousno="{{item.previousno}}" data-item="{{item}}" bindtap="toDetail">
+          <view>
+            <image class="image" src="{{item.materialImage[0]}}"></image>
+          </view>
+          <view class="info">
+            <block wx:if="{{item.publType == '0'}}">
+              <text class="station">{{filter.beautySub(item.properystation,4)}}-{{filter.beautySub(item.medialocation,4)}}</text>
+            </block>
+            <block wx:if="{{item.publType == '1'}}">
+               <text class="station">{{filter.beautySub(item.trainInfo,8)}}</text>
+            </block>
+            <text class="range">{{item.begindate}}~{{item.enddate}}({{item.datenum}}天)</text>
+            <view class="position">
+              <text>{{filter.beautySub(item.mediatype,8)}}</text>
+              <!-- *
+          <text>{{item.mcount}}</text> -->
+            </view>
+            <text class="company">{{filter.beautySub(item.bdid2name,8)}}</text>
+          </view>
+          <!-- <view class="approving" wx:if="{{item.appstatus == '0'}}">
+        <text>待审批</text>
+      </view> -->
+          <view class="approved" wx:if="{{item.appstatus == '1'}}">
+            <text>已审批</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class='logout'>
+    <view class='user-icon' bindtap="main">
+      <text class='iconfont icon-user'></text>
+    </view>
+  </view>
+  <!-- <view wx-if="{{isLoading}}" class='loading'>正在加载中...</view> -->
+</scroll-view>

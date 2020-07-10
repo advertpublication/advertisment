@@ -1,0 +1,42 @@
+<view class='wide'>
+  <!-- header -->
+  <view class='header'>
+    <view class='title'>
+      铁路广告媒体
+    </view>
+    <view class='title'>上刊巡检服务平台</view>
+    <!-- <view class='im'>
+      <image class='myImage' src='../../images/img1.png'></image>
+    </view> -->
+  </view>
+  <!-- 表单 -->
+  <form bindsubmit="formSubmit">
+    <view class='user'>
+      <image src='../../images/user_icon.png' />
+      <input type='text' name='loginName' placeholder='输入用户名'></input>
+    </view>
+
+    <view class='user'>
+      <image src='../../images/password_icon.png'></image>
+      <input password type="text" name='pwd' placeholder='输入密码'></input>
+    </view>
+    <!-- <view class='user'>
+      <view class='inner'>
+        <image src='../../images/phone_icon.png'>
+        </image>
+        <input name='phone' type='number' placeholder='您的手机号'></input>
+      </view>
+      <button class='butt' bindtap="test">获取</button>
+    </view> -->
+    <view>
+      <!-- <text>忘记密码?</text> -->
+    </view>
+    <view>
+      <button class='login' formType="submit" >登录</button>
+    </view>
+  </form>
+
+
+  <!-- footer -->
+  <view class='bottom'>中铁程科技有限责任公司 @ 2019</view>
+</view>

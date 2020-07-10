@@ -1,0 +1,38 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 上部信息 -->
+  <view class="top-info">
+    <view class='avatar'>
+      <text class="iconfont icon-user"></text>
+      <!-- <image></image> -->
+    </view>
+    <view class='phone'>{{userInfo.name}}</view>
+  </view>
+
+  <!-- 我的信息 -->
+  <view class='my-info'>
+    <view class='my-wallet'>
+      <text class='iconfont icon-company'></text>{{userInfo.company}}
+    </view>
+    <view class='my-wallet'>
+      <text class='iconfont icon-phone'></text>{{userInfo.phone}}
+    </view>
+    <view class='my-wallet' wx:if="{{userInfo.type == 'U05'}}">
+      <text class='iconfont icon-job'></text>施工负责人
+    </view>
+    <view class='my-wallet' wx:if="{{userInfo.type == 'U01'}}">
+      <text class='iconfont icon-job'></text>审批人
+    </view>
+    <view class='my-wallet' wx:if="{{buildFlag}}">
+      <text class='iconfont icon-job'></text>施工人
+    </view>
+  </view>
+  <!-- 广告图片 -->
+  <view class="advert-picture">
+    <image class="picture" bindtap="imgYu" src="../../../images/main.png"></image>
+  </view>
+  <!-- bottom -->
+  <view class='exit' bindtap="logout">
+    切换账号
+  </view>
+</view>
