@@ -15,10 +15,12 @@
 // }
 
 /*1*************************/
-const HOST = "https://ad.12306.cn/app/advertpublication/admin/app/publish/";
+// const HOST = "https://ad.12306.cn/app/advertpublication/admin/app/publish/";
 //HOST ="http://172.20.10.2:8081/admin/app/publish";
 //const HOST ="http://localhost:8080/advertpublication/admin/app/publish";
 //const HOST="https://ad.12306.cn/app/advert_test/admin/app/publish";
+const HOST = "http://localhost:8080/admin/app/publish";
+
 /**
  * get请求
  */
