@@ -1,0 +1,561 @@
+<!-- 上刊基本信息 -->
+<wxs module="filter" src="details.wxs"></wxs>
+<view class='issue-info'>
+	<view class="title">
+		<text>上刊基本信息</text>
+	</view>
+	<view class="item">
+		<view class="left">
+			<view class="icon">
+				<image class='images' src="../../../images/icon1.png"></image>
+			</view>
+			<view class="field">
+				<text>{{item.contractname}}</text>
+			</view>
+		</view>
+		<view class="right star-container">
+			<view class="white-star">
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+				<image src="../../../images/white-star.png"></image>
+			</view>
+
+			<view class="star" style="width: {{starWidth}}">
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+				<image src="../../../images/star.png"></image>
+			</view>
+		</view>
+	</view>
+	<view class="item">
+		<view class="left">
+			<view class="icon">
+				<image class='images' src="../../../images/icon2.png"></image>
+			</view>
+			<view class="field">
+				<text>{{item.bdid2name}}</text>
+			</view>
+		</view>
+		<view class="rights" bindtap='companyInfo'>
+			<view>
+				<text>资质</text>
+			</view>
+			<view class="arrow">
+				<image src="../../../images/arrow.png"></image>
+			</view>
+		</view>
+	</view>
+	<block wx:if="{{item.publType == '0'}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/icon3.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.mtype}}</text>
+				</view>
+			</view>
+			<view class="rights" bindtap='mediaInfo'>
+				<view>
+					<text>媒体详情</text>
+				</view>
+				<view class="arrow">
+					<image src="../../../images/arrow.png"></image>
+				</view>
+			</view>
+		</view>
+	</block>
+	<block wx:if="{{item.publType == '1'}}">
+		<view class="item" wx:for="{{item.dwAdvertinstallresourceList}}" wx:key="{{index}}" data-item="{{item}}">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/train.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.trainTypeName}}~{{item.mediacount}}组~{{item.mediatypename}}</text>
+				</view>
+			</view>
+		</view>
+	</block>
+	<view class="item">
+		<view class="left">
+			<view class="icon">
+				<image class='images' src="../../../images/icon4.png"></image>
+			</view>
+			<view class="field">
+				<text>{{item.uptime}} ~ {{item.downtime}}</text>
+			</view>
+		</view>
+		<view class="right">
+
+		</view>
+	</view>
+	<block wx:if="{{item.publType == '0'}}">
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/icon5.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.address}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="item">
+			<view class="left">
+				<view class="icon">
+					<image class='images' src="../../../images/icon5.png"></image>
+				</view>
+				<view class="field">
+					<text>{{item.medialocation}}</text>
+				</view>
+			</view>
+			<block wx:if="{{item.cmMediaImgList.length>0}}">
+				<view class="rights" bindtap='issueContent'>
+					<view>
+						<text>点位图</text>
+					</view>
+					<view class="arrow">
+						<image src="../../../images/arrow.png"></image>
+					</view>
+				</view>
+			</block>
+		</view>
+	</block>
+</view>
+
+<!-- 上刊效果图 -->
+<view class="middle">
+	<view class="title">
+		<text>上刊效果图</text>
+	</view>
+	<swiper indicator-dots="{{true}}" current="0">
+		<block wx:for="{{item.materiallist}}" data-index='{{index}}' data-item="{{item}}">
+			<swiper-item>
+				<block wx:if="{{isMp4[index]}}">
+					<image class="picture" bindtap="previewImage" data-src="{{item}}" src="{{item}}"></image>
+				</block>
+				<block wx:if="{{!isMp4[index]}}">
+					<video src="{{item}}" controls></video>
+				</block>
+			</swiper-item>
+		</block>
+	</swiper>
+</view>
+<!-- 施工效果图 -->
+<block wx:if="{{item.buildImage.length> 0}}">
+	<view class="result">
+		<!-- <view class="title" wx:if="{{item.publType == '1'}}">
+			<text>列车车底号</text>
+		</view> -->
+		<view class="title">
+			<text>施工结果信息</text>
+		</view>
+		<view class="table">
+			<block wx:for="{{item.dwAdvertinstallresourceList}}" wx:key="*this" wx:for-item="resourceItem" wx:for-index="resourceindex" wx:if="{{item.publType == '1'}}">
+				<block wx:for="{{resourceItem.inputArray}}" wx:key="*this" wx:for-item="inputItem" wx:for-index="numindex">
+					<view class="tr bg-g" wx:if="{{numindex % 2 == 0}}">
+						<view class="td">{{resourceItem.trainTypeName}}</view>
+						<view class="td">{{filter.beautySub(resourceItem.mediatypename,12)}}</view>
+						<view class="td">
+							<block wx:if="{{resourceItem.marshallingName}}">
+								{{filter.getMarshalling(resourceItem.trainTypeName,resourceItem.marshallingName,numindex)}}
+							</block>
+							<block wx:if="{{!resourceItem.marshallingName || !filter.checkMarshalling(resourceItem.marshallingName,numindex)}}">
+								{{resourceItem.trainTypeName}}-
+								<input class='marshalling-num' data-resource="{{resourceindex}}" data-num="{{numindex}}" value="{{inputItem}}" bindblur="doInput"></input>
+							</block>
+						</view>
+					</view>
+					<view class="tr" wx:else>
+						<view class="td">{{resourceItem.trainTypeName}}</view>
+						<view class="td">{{filter.beautySub(resourceItem.mediatypename,12)}}</view>
+						<view class="td">
+							<block wx:if="{{resourceItem.marshallingName}}">
+								{{filter.getMarshalling(resourceItem.trainTypeName,resourceItem.marshallingName,numindex)}}
+							</block>
+							<block wx:if="{{!resourceItem.marshallingName  || !filter.checkMarshalling(resourceItem.marshallingName,numindex)}}">
+								{{resourceItem.trainTypeName}}-
+								<input class='marshalling-num' data-resource="{{resourceindex}}" data-num="{{numindex}}" value="{{inputItem}}" bindblur="doInput"></input>
+							</block>
+						</view>
+					</view>
+				</block>
+			</block>
+		</view>
+		<view class="photo-list">
+			<block wx:for="{{item.buildImage}}" wx:key="{{index}}">
+				<view class="photo">
+					<image src="{{item.filename}}" data-src="{{item.filename}}" bindtap="previewPhoto"></image>
+					<view class="cover f-jb">
+						<view>{{item.resultTime}}</view>
+					</view>
+				</view>
+			</block>
+		</view>
+		<block wx:if="{{item.buildremarks!= ''}}">
+			<view class="title">
+				<text>施工结果说明</text>
+			</view>
+			<view class="input-explain">
+				<block wx:for="{{item.buildremarks}}">
+					<view>{{item.remark}}+"------"+{{item.resultTime}}</view>
+				</block>
+				<!-- <textarea placeholder="施工说明" value="{{item.buildremarks}}" bindinput='inputExplain' disabled='false'></textarea> -->
+			</view>
+		</block>
+	</view>
+</block>
+<!-- 媒体点位信息 -->
+<view class="bottom">
+	<view class="title">
+		<text>媒体点位信息</text>
+	</view>
+	<view class="table">
+		<view class="tr bg-w">
+			<!-- <view class="th">
+        <checkbox-group bindchange="checkedAll">
+          <label>
+            <checkbox checked="{{checked_all}}" />
+          </label>
+        </checkbox-group>
+      </view>  -->
+			<block wx:if="{{item.publType == '0'}}">
+				<view class="th">发布车站</view>
+			</block>
+			<block wx:else>
+				<view class="th">列车车型</view>
+			</block>
+			<block wx:if="{{item.publType == '0'}}">
+				<view class="th">媒体类型</view>
+				<view class="th ">媒体位置</view>
+			</block>
+			<block wx:else>
+				<view class="th ">组数</view>
+			</block>
+			<view class="th ">施工时间</view>
+			<view class="th ">施工人员</view>
+		</view>
+		<block wx:for="{{item.dwAdvertinstallresourceList}}" wx:for-item="resourceItem" wx:key="{{code}}">
+			<view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+				<!-- <view class="td">
+          <checkbox-group bindchange="checkboxChange" data-checkid="{{resourceItem.id}}">
+            <label>
+              <checkbox checked="{{resourceItem.checked}}" />
+            </label>
+          </checkbox-group>
+        </view> -->
+				<block wx:if="{{item.publType == '0'}}">
+					<view class="td">{{resourceItem.properystationname}}</view>
+				</block>
+				<block wx:else>
+					<view class="td">{{resourceItem.trainTypeName}}</view>
+				</block>
+				<block wx:if="{{item.publType == '0'}}">
+					<view class="td">{{resourceItem.mediatypename}}</view>
+					<view class="td">{{resourceItem.medialocation}}</view>
+				</block>
+				<block wx:else>
+					<view class="td">{{resourceItem.mediacount}}</view>
+				</block>
+				<view class="td">{{resourceItem.constructionTime}}</view>
+				<view class="td">{{resourceItem.constructionName}}</view>
+				<!-- <view class="td">{{filter.beautySub(resourceItem.constructionName,4)}}</view> -->
+			</view>
+			<view class="tr" wx:else>
+				<!-- <view class="td">
+          <checkbox-group bindchange="checkboxChange" data-checkid="{{resourceItem.id}}">
+            <label>
+              <checkbox checked="{{resourceItem.checked}}" />
+            </label>
+          </checkbox-group>
+        </view> -->
+				<block wx:if="{{item.publType == '0'}}">
+					<view class="td">{{resourceItem.properystationname}}</view>
+				</block>
+				<block wx:else>
+					<view class="td">{{resourceItem.trainTypeName}}</view>
+				</block>
+				<block wx:if="{{item.publType == '0'}}">
+					<view class="td">{{resourceItem.mediatypename}}</view>
+					<view class="td">{{resourceItem.medialocation}}</view>
+				</block>
+				<block wx:else>
+					<view class="td">{{resourceItem.mediacount}}</view>
+				</block>
+				<view class="td">{{resourceItem.constructionTime}}</view>
+				<view class="td">{{resourceItem.constructionName}}</view>
+				<!-- <view class="td">{{filter.beautySub(resourceItem.constructionName,4)}}</view> -->
+			</view>
+		</block>
+	</view>
+</view>
+<view class="btns">
+	<button class="btn-green" id='submit' bindtap='saveConsDist'>施工分配</button>
+	<button class="btn-orange" id='submit' bindtap='sendConsMsg'>发送施工提醒</button>
+	<block wx:if="{{constructionStationFlag == '0' && item.publType == '0' && item.dwAdvertinstallresourceList[0].constructionName && !item.buildImage}}">
+		<button class="btn-red" id='submit' bindtap='negotiation'>洽谈</button>
+	</block>
+	<block wx:if="{{item.advertStatus=='0' && item.buildImage.length> 0 && item.buildConfirmStatus == '1' && constructionStationFlag == '1'}}">
+		<button class="btn-orange" id='submit' bindtap='buildConfirm'>施工结果确认</button>
+	</block>
+	<block wx:if="{{item.advertStatus=='0' && item.buildImage.length> 0 && item.buildConfirmStatus == '1' && constructionStationFlag == '0' && item.publType=='1'}}">
+		<button class="btn-orange" id='submit' bindtap='buildConfirm'>施工结果确认</button>
+	</block>
+</view>
+<!--施工分配弹出框-->
+<block wx:if="{{examine}}">
+	<view class="mask" catchtouchmove="preventTouchmove">
+		<view class="examine-model-yes1">
+			<view class="examine-model-title">
+				<text>施工分配</text>
+			</view>
+			<view class="examine-model-input">
+      <scroll-view scroll-y="true" style="height: 260rpx;">
+				<view class="examine-model-input-1">
+					<text>施工时间:</text>
+					<!-- 时间、日期 -->
+					<view class="section">
+						<picker mode="date" value="{{dates}}" start="2019-01-01" end="2069-1-23" bindchange="bindDateChange">
+							<view class="picker">
+								{{dates}}
+							</view>
+						</picker>
+					</view>
+					<view class="section">
+						<picker mode="time" value="{{times}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+							<view class="picker">
+								{{times}}
+							</view>
+						</picker>
+					</view>
+				</view>
+				<!-- 流程复选框 -->
+				<view class="examine-model-input-1" wx:for='{{selectConsUserId}}'>
+					<text>施工人员:</text>
+					<!-- 流程下拉框 -->
+					<!-- <view class='list-msg2' bindtap='bindShowMsg'>
+            <Select cons-array='{{constructerList}}' bind:myget='getDate'></Select>
+          </view> -->
+					<view class="section">
+						<picker bindchange="changeSelectConsUserId" value="{{index}}" range="{{constructerArray1}}">
+							<view class="picker-1" data-index='{{index}}' bindtap='focusSelectConsUserId'>
+								{{constructerArray[index]}}
+							</view>
+						</picker>
+					</view>
+          <text wx:if='{{selectConsUserId.length-1 == index}}' class='iconfont' bindtap="addSelectConsUserId">+</text>
+          <text wx:else class='iconfont ' data-index="{{index}}" bindtap="delSelectConsUserId">-</text>
+				</view>
+        
+				<!-- <block wx:if="{{railwaybureau=='Y' && item.publType == '1'}}">
+					<view class="examine-model-input-1">
+						<text>施工人员2:</text>
+						<view class="section">
+							<picker bindchange="bindPickerChange2" value="{{index}}" range="{{constructerArray2}}">
+								<view class="picker-1">
+									{{constructerArray2[index2]}}
+								</view>
+							</picker>
+						</view>
+            
+				</block> -->
+      </scroll-view>
+			</view>
+			<view class="examine-model-btns">
+				<view bindtap="noApprove">
+					<text>取消</text>
+				</view>
+				<view class="short-line"></view>
+				<view bindtap="doApprove">
+					<text>提交</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</block>
+<!--施工洽谈-->
+<block wx:if="{{negotiationExamine}}">
+	<view class="mask" catchtouchmove="preventTouchmove">
+		<view class="examine-model-yes">
+			<view class="examine-model-title">
+				<text>施工洽谈</text>
+			</view>
+			<!--施工时间-->
+			<view class="examine-model-input">
+				<view class="examine-model-input-1">
+					<text>施工时间:</text>
+					<view class="section">
+						{{item.dwAdvertinstallresourceList[0].constructionTime}}
+					</view>
+				</view>
+				<!--施工人员-->
+				<view class="examine-model-input-1">
+					<text>施工人员:</text>
+					<view class="section">
+						{{item.dwAdvertinstallresourceList[0].constructionName}}
+					</view>
+				</view>
+				<!--施工人员电话-->
+				<view class="examine-model-input-1">
+					<text>电话:</text>
+					<view class="section">
+						{{item.dwAdvertinstallresourceList[0].constructionMobile}}
+					</view>
+				</view>
+				<!--洽谈工作-->
+				<view class="examine-model-input-3">
+					<text>洽谈工作:</text>
+					<view class="section-content">
+						<textarea bindinput='textarea' value='{{negotiationContent}}' placeholder="请输入要洽谈内容，且不超过200字..."></textarea>
+					</view>
+				</view>
+				<!--需接洽单位-->
+				<block wx:if="{{stationUserList}}">
+					<view class="examine-model-input-1">
+						<text>洽谈单位:</text>
+						<view class="section">
+							{{stationUserList[0].officeName}}
+						</view>
+					</view>
+					<view class="examine-model-input-1">
+						<text>洽谈单位负责人:</text>
+						<view class="section">
+							{{stationUserList[0].name}}
+						</view>
+					</view>
+					<view class="examine-model-input-1">
+						<text>负责人电话:</text>
+						<view class="section">
+							{{stationUserList[0].mobile}}
+						</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="examine-model-input-3">
+						<text>要洽谈站段信息:</text>
+						<view class="remind">
+							还未添加相应接洽站段，请联系管理员添加需接洽的站段信息
+						</view>
+					</view>
+				</block>
+			</view>
+			<view class="examine-model-btns">
+				<view bindtap="cancel">
+					<text>取消</text>
+				</view>
+				<view class="short-line"></view>
+				<view bindtap="doNegotiation"  data-status="0">
+					<text>提交</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</block>
+<!-- 一次洽谈之后的洽谈 -->
+<block wx:if="{{isNegotiated}}">
+	<view class="mask" catchtouchmove="preventTouchmove">
+		<view class="examine-model-yes2">
+			<view class="examine-model-title">
+				<text>施工洽谈</text>
+			</view>
+			<view class="history">
+				<view>
+					<view class="title">
+						<text>施工负责人洽谈信息</text>
+					</view>
+					<view class="content">
+						<view class="content-item">
+							<text>施工时间</text>
+							<!-- <view>{{list[0].constTime}}</view> -->
+							<view class="section">
+								<picker mode="date" value="{{dates}}" start="2019-01-01" end="2069-1-23" bindchange="bindDateChange">
+									<view class="picker">
+										{{dates}}
+									</view>
+								</picker>
+							</view>
+							<view class="section">
+								<picker mode="time" value="{{times}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+									<view class="picker">
+										{{times}}
+									</view>
+								</picker>
+							</view>
+							<view class="section">
+								（可编辑）
+							</view>
+						</view>
+						<view class="content-item">
+							<text>施工人员</text>
+							<view>{{list[0].constName}}</view>
+						</view>
+						<view class="content-item">
+							<text>施工人员电话</text>
+							<view>18341268908</view>
+						</view>
+						<view class="content-item-1">
+							<text>施工负责人意见（可编辑）</text>
+							<view class="textarea-item">
+								<textarea bindinput='textarea' value='{{list[0].workContent}}' placeholder="请输入要洽谈内容，且不超过200字..."></textarea>
+							</view>
+						</view>
+						<view>
+						</view>
+					</view>
+				</view>
+				<view class="station-item">
+					<view class="title">
+						<text>站段负责人反馈信息</text>
+					</view>
+					<block wx:if="{{list[0].constStationPerson && list[0].constStationPersonPhone}}">
+						<view class="content">
+							<view class="content-item">
+								<text>站段接洽人</text>
+								<view>
+									{{list[0].constStationPerson}}
+								</view>
+							</view>
+							<view class="content-item">
+								<text>站段接洽人电话</text>
+								<view>{{list[0].constStationPersonPhone}}</view>
+							</view>
+							<view class="content-item-1">
+								<text>站段负责人意见(只读)</text>
+								<view class="textarea-item">
+									<textarea bindinput='textarea' value='{{list[0].commentConts}}' placeholder="请输入要洽谈内容，且不超过200字..." disabled="disabled"></textarea>
+								</view>
+							</view>
+						</view>
+						<block wx:if="{{list[0].state == 0}}">
+							<view class="examine-model-btns">
+								<view bindtap="doNegotiation" data-status="0">
+									<text>提交</text>
+								</view>
+								<view class="short-line"></view>
+								<view bindtap="doNegotiation" data-status="1">
+									<text>确认</text>
+								</view>
+							</view>
+						</block>
+					</block>
+					<block wx:else>
+						<view class="content">
+							<view class="content-item-1">
+								<view class="textarea-item">
+									<view class="explain">
+										站段负责人尚未给出反馈信息，请于相关人员联系
+									</view>
+								</view>
+							</view>
+						</view>
+					</block>
+				</view>
+			</view>
+		</view>
+	</view>
+</block>

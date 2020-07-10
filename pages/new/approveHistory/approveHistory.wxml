@@ -1,0 +1,41 @@
+<!-- header -->
+<view class="header">
+  <view class="btns">
+    <view class="search" bindtap="toSearch">
+      <image src="../../../images/shouye-sousuo.png"></image>
+      <text>搜索</text>
+    </view>
+    <view class="line"></view>
+    <view class="filter">
+      <image src="../../../images/shouye-shaixuan.png"></image>
+      <text>筛选</text>
+    </view>
+    <picker mode="multiSelector" 
+            bindchange="pickerChange" 
+            value="{{pickerIndex}}" 
+            range="{{pickerArray}}"  
+            range-key="name">
+      <view class="picker"></view>
+    </picker>
+  </view>
+</view>
+
+<!-- 列表 -->
+<view class="list">
+  <block wx:for="{{list}}" wx:key="{{index}}">
+    <view class="item" data-id="{{item.id}}" data-previousno="{{item.previousno}}" data-item="{{item}}" bindtap="toDetail">
+      <view>
+          <image class="image" src="{{item.materialImage[0]}}"></image>
+      </view>
+      <view class="info">
+        <text class="station">{{item.properystation}}-{{item.medialocation}}</text>
+        <text class="range">{{item.begindate}}~{{item.enddate}}({{item.datenum}}天)</text>
+        <text class="position">{{item.mediatype}}*{{item.mcount}}</text>
+        <text class="company">{{item.bdid2name}}</text>
+      </view>
+      <!-- <view class="date">
+        <text>{{item.registerDate}}</text> 
+      </view> -->
+    </view>
+  </block>
+</view>

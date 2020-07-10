@@ -1,0 +1,45 @@
+<view class="header">
+  <input 
+      type="text"
+      placeholder="上刊标题、上刊内容、行业"
+      placeholder-class="placeholder">
+    <image
+        class="image"
+        src="../../../images/sousuo-sousuo.png"></image>
+  </input>
+  <view class="cancel">
+    <text>取消</text>
+  </view>
+</view>
+
+<view class="tips">
+  <text>搜索结果: 共2条</text>
+</view>
+
+<!-- 搜索结果 列表 -->
+<view class="list">
+  <block 
+      wx:for="{{list}}" 
+      wx:key="{{index}}"
+  >
+    <view 
+        class="item" 
+        data-id="{{item.id}}"
+        data-previousno="{{item.previousno}}"
+        data-item="{{item}}" 
+        bindtap="toDetail">
+      <view>
+        <image class="image" src="{{item.imgurl}}"></image>
+      </view>
+      <view class="info">
+        <text class="agent">{{item.contractName}}</text>
+        <text class="position">{{item.medialocation}}</text>
+        <text class="range">{{item.range}}</text>
+        <text class="company">{{item.company}}</text>
+      </view>
+      <view class="date">
+        <text>{{item.registerDate}}</text> 
+      </view>
+    </view>
+  </block>
+</view>

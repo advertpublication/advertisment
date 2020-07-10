@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "受理详情",
+  "usingComponents": {
+    "Select": "/Componet/select/select"
+  }
+}

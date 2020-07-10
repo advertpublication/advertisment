@@ -1,0 +1,104 @@
+page{
+  width: 100%;
+  height: 100%;
+  font-size: 30rpx;
+  color: #333333;
+}
+
+/* 过滤标题 */
+.title{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #eeeeee;
+}
+
+.title text{
+  margin-left: 20rpx;
+  padding-left: 10rpx;
+  border-left: 5rpx solid blue;
+}
+
+.title .clear{
+  float: right;
+  border: none;
+  margin-right: 20rpx;
+}
+
+/* 过滤条件选择器 */
+.picker{
+  float: right;
+  margin-right: 20rpx;
+}
+
+.arrow{
+  width: 60rpx;
+  height: 40rpx;
+  background-color: red;
+  vertical-align: middle;
+}
+
+/* 选中的过滤条件 */
+.condition{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* 上刊申请列表 */
+.list{
+  width: 100%;
+}
+
+.item{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40rpx;
+  border-bottom: 1px dashed #000000;
+  /* background-color: #93dd1b; */
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.image{
+  width: 160rpx;
+  height: 100rpx;
+  background-color: #eeeeee;
+  vertical-align: middle;
+}
+
+.info{
+  box-sizing: border-box;
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.info text{
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.status{
+  width: 120rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 40rpx;
+  bottom: 50rpx;
+}
+
+/* 状态字体颜色 */
+.text-red{
+  color: red;
+}
+
+.text-green{
+  color: green;
+}
+
+.text-blue{
+  color: blue;
+}

@@ -1,0 +1,46 @@
+<view class='header'>
+  <view class='header1'>
+    <label class='title'>组织机构</label>
+    <view class='content'>
+      <block  wx:for="{{organizations}}" wx:key="{{index}}">
+        <text 
+            class="{{index == active ? 'active': ''}}" 
+            data-index="{{index}}" 
+            bindtap="tapGroup">
+          {{item.name}}
+        </text>
+      </block>
+    </view>
+  </view>
+  <view>
+    <label class='title'>选择用户</label>
+    <view class='content'>
+      <block  wx:for="{{organizations[active].subData}}" wx:key="{{index}}">
+        <text data-select="{{index}}" bindtap='tapUser'>{{item.name}}</text>
+      </block>
+    </view>
+  </view> 
+   <view>
+    <label class='title'>已选用户</label>
+    <view class='content'>
+      <block wx:for="{{selectedUsers}}" wx:key="{{index}}">
+        <text data-index="{{index}}" bindtap='tapSelectUser'>{{item.name}}</text>
+      </block>
+    </view>
+  </view> 
+</view>
+<view class='bottom'>
+  <view class='bottom-first'>
+    <text class='sign'>备注</text>
+    <textarea 
+        class='textarea' 
+        placeholder="这是我的第一级审批环节" 
+        value="{{remark}}" 
+        bindinput="textInput"
+    />
+  </view>
+  <view class='bottom-second'>
+    <button bindtap="saveNode">保存</button>
+    <button bindtap="cancel">取消</button>
+  </view>
+</view>

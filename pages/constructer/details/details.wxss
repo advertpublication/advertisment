@@ -1,0 +1,621 @@
+/* 标题 */
+
+.title {
+  width: 750rpx;
+  box-sizing: border-box;
+  padding: 30rpx 0 20rpx 20rpx;
+  font-size: 30rpx;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 30rpx;
+}
+
+/* 基本信息 */
+
+.item {
+  width: 710rpx;
+  box-sizing: border-box;
+  border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 20rpx;
+  padding-left: 40rpx;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+}
+
+/* 左侧 */
+
+.left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 20rpx 0;
+}
+
+/* 图标 */
+
+.icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: -12rpx;
+}
+
+/* 文字 */
+
+.field {
+  box-sizing: border-box;
+  padding-left: 20rpx;
+  font-size: 26rpx;
+  line-height: 26rpx;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* 右侧 */
+
+/* 星星 */
+
+.star-container {
+  width: 180rpx;
+  height: 24rpx;
+  position: relative;
+}
+
+.star, .white-star {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.star > image, .white-star > image {
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 10rpx;
+  float: left;
+}
+
+/* 箭头 */
+
+.arrow {
+  width: 20rpx;
+  height: 20rpx;
+  padding: 0 0 0 20rpx;
+  line-height: 20rpx;
+}
+
+/* 文字 */
+
+.right > text {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* 效果图 */
+
+.middle {
+  width: 750rpx;
+  border-top: 4rpx solid #ededed;
+}
+
+/* 轮播 */
+
+swiper {
+  width: 100%;
+  height: 300rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx 20rpx;
+}
+
+/* 施工时间 */
+
+.middle-bottom {
+  width: 750rpx;
+  border-top: 2rpx solid #ededed;
+  padding-bottom: 10rpx;
+}
+
+/* 施工结果 */
+
+.result {
+  width: 750rpx;
+  border-top: 4rpx solid #ededed;
+  /* padding-bottom: 160rpx; */
+  padding-bottom: 40rpx;
+}
+
+/* 输入框 */
+
+.input-explain {
+  width: 750rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+}
+
+textarea {
+  width: 100%;
+  height: 300rpx;
+  border-bottom: 1rpx solid #ededed;
+}
+
+/* 照片 */
+.photo-list {
+  width: 750rpx;
+  box-sizing: border-box;
+  padding: 20rpx;
+  overflow: hidden;
+}
+
+.photo {
+  width: 350rpx;
+  height: 200rpx;
+  margin-bottom: 10rpx;
+  float: left;
+  position: relative;
+}
+
+.photo:nth-child(odd) {
+  margin-right: 10rpx;
+}
+
+.add-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-photo > image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.delete-photo {
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* 按钮组 */
+
+.btns {
+  width: 750rpx;
+  box-sizing: border-box;
+  border-top: 4rpx solid #ededed;
+  padding: 30rpx 0rpx;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.btns button {
+  height: 60rpx;
+  width: 164rpx;
+  font-size: 26rpx;
+  color: #fff;
+  margin: 0 16rpx;
+  padding: 0;
+}
+
+/* 按钮颜色 */
+
+.btn-green {
+  background-color: #1ad473;
+  opacity: 1;
+}
+
+/*驳回颜色*/
+
+.btn-red {
+  background-color: red;
+  opacity: 1;
+}
+
+/*返回颜色*/
+
+.btn-orange {
+  background-color: #f49110;
+  opacity: 1;
+}
+
+/*驳回意见输入框*/
+
+/* 审批意见 输入框 */
+
+.mask {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 11;
+}
+
+/* 同意申请框样式 */
+
+.examine-model-yes {
+  width: 652rpx;
+  height: 860rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+
+.examine-model-yes1 {
+  width: 652rpx;
+  height: 420rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+
+
+.examine-model-yes2 {
+  width: 652rpx;
+  height: 1056rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+
+.examine-model {
+  width: 500rpx;
+  height: 300rpx;
+  border-radius: 10rpx;
+  background-color: #ededed;
+}
+
+.examine-model-title {
+  width: 100%;
+  height: 70rpx;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 28rpx;
+  line-height: 70rpx;
+  text-align: center;
+  background-color: #ededed;
+}
+
+.examine-model-yes1 .examine-model-input {
+  width: 100%;
+  height: 260rpx;
+  box-sizing: border-box;
+  padding: 0 30rpx 30rpx;
+  font-size: 28rpx;
+}
+
+.examine-model-input {
+  width: 100%;
+  height: 710rpx;
+  box-sizing: border-box;
+  padding: 0 30rpx 30rpx;
+  font-size: 28rpx;
+}
+.examine-model-input-1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 6rpx 30rpx;
+  border-bottom: #ededed solid 0.2rpx;
+}
+
+.examine-model-input-1 > text {
+  line-height: 64rpx;
+  margin-right: 10px;
+}
+
+/* textarea {
+  width: 100%;
+  height: 100%;
+  border-radius: 5rpx;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.6);
+} */
+
+.examine-model-btns {
+  width: 100%;
+  height: 70rpx;
+  box-sizing: border-box;
+  border-top: 1rpx solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.examine-model-btns > view {
+  width: 50%;
+  height: 100%;
+  color: #00b0f0;
+  font-size: 26rpx;
+  line-height: 70rpx;
+  text-align: center;
+}
+
+.rights {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 26rpx;
+  line-height: 26rpx;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* 审批历史 */
+
+.history {
+  /* width: 750rpx; */
+  box-sizing: border-box;
+  border-top: 4rpx solid #ededed;
+  /* padding: 30rpx 20rpx 100rpx 60rpx; */
+}
+
+.history-item {
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 60rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 左侧用户信息 */
+
+.user {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.circle {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #00b0f0;
+  font-size: 30rpx;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
+  position: relative;
+}
+
+.circle_no {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 30rpx;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
+  position: relative;
+}
+
+.vertical-line {
+  width: 8rpx;
+  height: 40rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: -50rpx;
+  left: 36rpx;
+}
+
+.approve-info {
+  box-sizing: border-box;
+  padding-left: 20rpx;
+}
+
+.name {
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 28rpx;
+}
+
+.status {
+  box-sizing: border-box;
+  padding-top: 20rpx;
+  color: #53b90f;
+  font-size: 26rpx;
+  line-height: 26rpx;
+}
+
+.status.reject {
+  color: #af081b;
+}
+
+/* 右侧时间和理由 */
+
+.reason {
+  height: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 26rpx;
+  line-height: 26rpx;
+}
+
+.reason-detail {
+  box-sizing: border-box;
+  padding-top: 20rpx;
+}
+
+/* 底部样式 */
+
+.bottom {
+  width: 750rpx;
+  border-top: 4rpx solid #ededed;
+  margin-bottom: 130rpx;
+}
+
+/* 底部表格样式 */
+
+.table {
+  border: 0px solid darkgray;
+  padding: 0 20rpx;
+  font-size: 26rpx;
+}
+
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+
+.td {
+  width: 40%;
+  justify-content: center;
+  text-align: center;
+  display:flex;
+  align-items:center;
+}
+
+.bg-w {
+  background: snow;
+}
+
+.bg-g {
+  background: #e6f3f9;
+}
+
+.th {
+  width: 40%;
+  justify-content: center;
+  background: #00b0f0;
+  color: #fff;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
+
+/* 重写 checkbox 样式 */
+
+/* 未选中的 背景样式 */
+
+checkbox .wx-checkbox-input {
+  width: 26rpx; /* 背景的宽 */
+  height: 26rpx; /* 背景的高 */
+}
+
+.section {
+  line-height: 64rpx;
+}
+
+.content-item .section {
+  line-height: 40rpx;
+}
+
+
+
+/* .picker-1 {
+  padding: 0 50rpx;
+} */
+.advert-content{
+  width: 100%;
+  height: 200rpx; 
+  box-sizing: border-box;
+  padding: 0 40rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.2);
+}
+
+textarea{
+  width: 100%;
+  height: 100%;
+  border-radius: 5rpx;
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.6);
+  border:#A9A9A9 solid 0.2rpx;
+}
+
+.section-content{
+  width: 100%;
+  height: 180rpx;
+  padding:10rpx 0;
+}
+
+.examine-model-input-3 {
+  padding: 6rpx 30rpx;
+}
+
+.examine-model-btns > .short-line{
+  width: 0;
+  height: 60rpx;
+  box-sizing: border-box;
+  border-left: 1rpx solid rgba(0, 0, 0, 0.1);
+  /* position: absolute; */
+  top: 15rpx;
+  left: 50%;
+}
+
+.remind {
+  line-height: 64rpx;
+  padding: 10rpx 0;
+  color: red;
+}
+
+content{
+  padding: 20rpx;
+}
+
+.content-item{
+  display: flex;
+  justify-content: space-between;
+  padding:10rpx  40rpx;
+}
+
+.examine-model-yes2 .content-item{
+  display: flex;
+  justify-content: space-between;
+  padding:4rpx  40rpx;
+}
+
+.content-item-1{
+  padding: 10rpx 40rpx;
+}
+
+.content-item-1 textarea {
+  width: 100%;
+  height: 180rpx;
+  border: 1rpx solid black;
+}
+
+.textarea-item{
+  width: 100%;
+  padding: 10rpx 0 0 0;
+}
+
+.explain{
+  width: 100%;
+  height: 300rpx;
+  border: 1rpx solid black;
+  font-size: 36rpx;
+  color:red;
+}
+
+.cover{
+	position: absolute;
+	width: 94%;
+	left: 0;
+	bottom: 0;
+	height: 50rpx;
+	align-items: center;
+	color: #fff;
+	padding:0 10rpx;
+	background: rgba(10,10,10,0.5);
+}
+
+.marshalling-num {
+  border: 1rpx solid;
+  width: 80%;
+}

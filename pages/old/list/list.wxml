@@ -1,0 +1,59 @@
+<wxs src="./list.wxs" module="tools" />
+
+<!-- 过滤条件 -->
+<view class="filter">
+  <view class="title">
+    <text>过滤条件</text>
+    <text class="clear" bindtap="clearFilter">清空</text>
+    <picker
+        mode="multiSelector"
+        class="picker"
+        value="{{pickerIndex}}" 
+        range="{{pickerList}}"
+        range-key="name"
+        bindchange="pickerChange">
+      <!-- <image class="arrow"></image> -->
+      选择条件
+    </picker>
+    <!-- <image class="arrow" bindtap="toFilter"></image> -->
+  </view>
+  <view class="condition">
+    <text class="station">{{station.name}}</text>
+    <text class="area">{{area.name}}</text>
+    <text class="company">{{company.name}}</text>
+  </view>
+</view>
+
+<!-- 上刊申请/审核/受理列表 -->
+<view>
+  <view class="title">
+    <text>上刊申请状态</text>
+  </view>
+  <view class="list">
+    <block wx:for="{{list}}" wx:key="{{index}}">
+      <view 
+          class="item" 
+          data-id="{{item.id}}" 
+          data-previousno="{{item.previousno}}" 
+          data-item="{{item}}" 
+          bindtap="toDetail">
+        <view>
+          <image class="image" src="{{item.imgurl}}"></image>
+        </view>
+        <view class="info">
+          <text class="area">{{item.medialocation}}</text>
+          <text class="company">{{item.contractName}}</text>
+          <text class="date">{{item.registerDate}}</text>
+        </view>
+        <view class="status">
+          <block wx:if="{{id == 'verifier' && business == 'verifier-approve'}}">
+            <text class="text-red">未处理</text>
+          </block>
+          <block wx:else>
+            <text class="{{tools.formatColor(business,item.acceptancestatus, item.submission, item.flowstatus, item.conditionType)}}">{{tools.formatText(business,item.acceptancestatus, item.submission, item.flowstatus, item.conditionType)}}</text>
+          </block>
+        </view>
+      </view>
+    </block>  
+  </view>
+</view>

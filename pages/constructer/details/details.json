@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "施工分配详情",
+    "usingComponents": {
+      "Select": "/Componet/select/select"
+    }
+}

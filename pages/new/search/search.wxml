@@ -1,0 +1,62 @@
+<view class="header">
+  <input type="text" value="{{input}}" placeholder="上刊标题、上刊内容、行业" placeholder-class="placeholder" bindinput="doInput">
+  <image class="image" src="../../../images/shouye-sousuo.png"></image>
+  </input>
+  <view class="cancel" bindtap="clearInput">
+    <text>取消</text>
+  </view>
+</view>
+
+<!-- 无搜索内容 -->
+<block wx:if="{{list.length == 0}}">
+  <view class="content">
+    <view class="can-do">
+      <view class="title-line title-line-left"></view>
+      <view class="title">
+        <text>在这里, 您可以搜索到</text>
+      </view>
+      <view class="title-line title-line-right"></view>
+    </view>
+    <view class="icons">
+      <view class="icon">
+        <image src="../../../images/sousuo-biaoti.png"></image>
+        <text>上刊标题</text>
+      </view>
+      <view class="icon">
+        <image src="../../../images/sousuo-neirong.png"></image>
+        <text>上刊内容</text>
+      </view>
+      <view class="icon">
+        <image src="../../../images/sousuo-hangye .png"></image>
+        <text>行业</text>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!-- 有搜索内容 -->
+<block wx:if="{{list != null && list.length > 0}}">
+  <view class="tips">
+    <text>搜索结果: 共{{list.length}}条</text>
+  </view>
+
+  <!-- 搜索结果 列表 -->
+  <view class="list">
+    <block wx:for="{{list}}" wx:key="{{index}}">
+      <view class="item" data-id="{{item.id}}" data-previousno="{{item.previousno}}" data-item="{{item}}" bindtap="toDetail">
+       <view>
+          <image class="image" src="{{item.materialImage[0]}}"></image>
+      </view>
+        <view class="info">
+          <text class="station">{{item.properystation}}-{{item.medialocation}}</text>
+          <text class="range">{{item.begindate}}~{{item.enddate}}({{item.datenum}}天)</text>
+          <text class="position">{{item.mediatype}}*{{item.mcount}}</text>
+          <text class="company">{{item.bdid2name}}</text>
+        </view>
+        <!-- <view class="date">
+          <text>{{item.registerDate}}</text> 
+        </view> -->
+      </view>
+    </block>
+  </view>
+</block>

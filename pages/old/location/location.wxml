@@ -1,0 +1,71 @@
+<!-- 按钮组 -->
+<view class="btns">
+  <button bindtap="confirm">选择</button>
+  <button>取消</button>
+</view>
+
+<!-- 选择条件 -->
+<view class="group">
+  <view class="title">
+    <text>车站</text>
+  </view>
+  <view class="content">
+    <block 
+        wx:for="{{pickerList}}" 
+        wx:key="{{index}}"
+    >
+      <view 
+          class="item {{index == activeStation ? 'active' : ''}}"
+          data-group="station"
+          data-index="{{index}}"
+          bindtap="selectChange"
+      >
+        {{item.station}}
+      </view>
+    </block>
+  </view>
+</view>
+
+<view class="group">
+  <view class="title">
+    <text>区域</text>
+  </view>
+  <view class="content">
+    <block 
+        wx:for="{{pickerList[activeStation].area}}" 
+        wx:key="{{index}}"
+    >
+      <view 
+          class="item {{index == activeArea ? 'active' : ''}}"
+          data-group="area"
+          data-index="{{index}}"
+          bindtap="selectChange"
+      >
+        {{item}}
+      </view>
+    </block>
+  </view>
+</view>
+
+<block wx:if="{{id == 'proposer'}}">
+  <view class="group">
+    <view class="title">
+      <text>公司</text>
+    </view>
+    <view class="content">
+      <block 
+          wx:for="{{pickerList[activeStation].company}}" 
+          wx:key="{{index}}"
+      >
+        <view 
+            class="item {{index == activeCompany ? 'active' : ''}}"
+            data-group="company"
+            data-index="{{index}}"
+            bindtap="selectChange"  
+        >
+          {{item}}
+        </view>
+      </block>
+    </view>
+  </view>
+</block>

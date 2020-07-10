@@ -1,0 +1,130 @@
+<!-- header -->
+<wxs module="filter" src="../../constructer/details/details.wxs"></wxs>
+<scroll-view>
+  <view class="header">
+    <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="filter">
+        <view class="icon">
+          <image src="../../../images/location_icon.png"></image>
+        </view>
+        <view class='pick'>
+          <text>{{multiArray[0][multiIndex[0]]}}</text>
+          <text class='three'></text>
+        </view>
+      </view>
+    </picker>
+    <view class='search-box'>
+      <input type="text" value="{{input}}" placeholder="投放企业、品牌、行业" class='search' placeholder-class="placeholder" bindinput="doInput">
+      </input>
+      <image class="image" src="../../../images/shouye-sousuo.png"></image>
+    </view>
+    <!-- </view> -->
+  </view>
+  <view class='container'>
+    <!-- <block wx:if="{{list.length==0}}">
+      <view class="tips">
+        <text>当前没有受理记录</text>
+      </view>
+    </block> -->
+   <view class="tips">
+  <text>你当前共有{{total}}个上刊受理项, 请注意查阅</text>
+</view>
+
+    <!-- 审批列表 -->
+    <view class="list">
+      <block wx:for="{{list}}" wx:key="{{index}}">
+        <view class="item" data-id="{{item.id}}" data-previousno="{{item.previousno}}" data-item="{{item}}" wx:if="{{item.acceptancestatus != null}}" bindtap="toDetail">
+          <view>
+          <block wx:if="{{filter.isVedio(item.materiallist[0].filename)}}">
+             <video class="image" src="{{item.materiallist[0].filename}}" controls></video>
+          </block>
+          <block wx:else>
+               <image class="image" src="{{item.commonPath}}/{{item.materiallist[0].belongdoc}}/{{item.materiallist[0].filename}}"></image>
+          </block>
+          </view>
+          <view class="info">
+            <block wx:if="{{item.publType == '0'}}">
+              <text class="station">{{filter.beautySub(item.address,10)}}-{{filter.beautySub(item.medialocation,10)}}</text>
+            </block>
+            <block wx:if="{{item.publType == '1'}}">
+              <text class="station">{{filter.beautySub(item.trainInfo,10)}}</text>
+            </block>
+            <text class="range">{{item.applytime}}~{{item.downtime}}</text>
+            <view class="position">
+              <text>{{filter.beautySub(item.mtype,10)}}</text>
+            </view>
+            <text class="company">{{item.bdid2name}}</text>
+          </view>
+          <view class="approving-red" wx:if="{{item.dwconstruction==null && item.conditionType ==1 &&item.flowstatus ==0 && item.acceptancestatus =='2'}}">
+            <text>已驳回</text>
+          </view>
+          <view class="approving" wx:if="{{item.dwconstruction==null && item.conditionType == 1 &&item.flowstatus ==0 && item.acceptancestatus =='1'}}">
+            <text>已受理</text>
+          </view>
+          <!-- <view class="approving" wx:if="{{item.dwconstruction==null && item.conditionType ==1 &&item.flowstatus ==0 && item.acceptancestatus =='0'}}">
+            <text>未受理</text>
+          </view> -->
+          <view class="approving" wx:if="{{item.dwconstruction==null && item.conditionType ==1 && item.acceptancestatus =='0'}}">
+            <text>未受理</text>
+          </view>
+          <!-- <view class="approving-red" wx:if="{{item.acceptancestatus==null}}">
+        <text>未申请</text>
+      </view> -->
+          <view class="approving-red" wx:if="{{item.dwconstruction==null && item.acceptancestatus=='2' && item.conditionType ==1 &&item.flowstatus ==3 && item.flowstatus2 != 3 && list.flowstatus3 != '3'}}">
+            <text>初审驳回</text>
+          </view>
+           <view class="approving-red" wx:if="{{item.acceptancestatus=='4'}}">
+            <text>预审驳回</text>
+          </view>
+          <view class="approving" wx:if="{{item.dwconstruction==null && item.conditionType ==1 &&item.flowstatus ==1 && item.acceptancestatus =='1'}}">
+            <text>初审中</text>
+          </view>
+          <view class="approving-blue" wx:if="{{item.dwconstruction==null && item.conditionType ==1 &&item.flowstatus ==2 &&item.flowstatus2 ==0 && item.acceptancestatus =='1'}}">
+            <text>初审通过</text>
+          </view>
+          <view class="approving-red" wx:if="{{item.acceptancestatus=='2' && item.dwconstruction==null && item.conditionType ==1 && item.flowstatus2==3}}">
+            <text>审核驳回</text>
+          </view>
+           <view class="approving-red" wx:if="{{item.acceptancestatus=='2' && item.dwconstruction==null && item.conditionType ==1 && item.flowstatus2==1}}">
+            <text>审核驳回</text>
+          </view>
+          <view class="approving" wx:if="{{item.dwconstruction==null && item.conditionType ==1 &&item.flowstatus2 ==1 && item.acceptancestatus =='1'}}">
+            <text>审核中</text>
+          </view>
+          <view class="approving-blue" wx:if="{{item.dwconstruction==null && item.conditionType ==1 &&item.flowstatus2 ==2 && item.acceptancestatus =='1' && item.flowstatus3 == 0}}">
+            <text>审核通过</text>
+          </view>
+          <block wx:if="{{constructionApproval==0}}">
+          <view class="approving-red" wx:if="{{item.dwconstruction==null && item.conditionType ==1 &&item.flowstatus2 ==2  && item.flowstatus3 == 3}}">
+            <text>转施工驳回</text>
+          </view>
+          <view class="approving-blue" wx:if="{{item.dwconstruction==null && item.conditionType ==1 &&item.flowstatus2 ==2   && item.acceptancestatus =='1' && item.flowstatus3 == 1}}">
+            <text>转施工审批中</text>
+          </view>
+          <view class="approving-blue" wx:if="{{item.dwconstruction==null && item.conditionType ==1 &&item.flowstatus2 ==2   && item.acceptancestatus =='1' && item.flowstatus3 == 2}}">
+            <text>转施工审通过</text>
+          </view>
+          </block>
+          <view class="approving-blue" wx:if="{{item.dwconstruction!=null && item.conditionType ==0 && item.flowstatus2 ==2 && item.consDisStatus==1 && item.acceptancestatus =='1'}}">
+            <text>待施工</text>
+          </view>
+          <view class="approving-blue" wx:if="{{item.dwconstruction!=null && item.conditionType ==0 && item.flowstatus2 ==2 && item.consDisStatus==0 && item.acceptancestatus =='1'}}">
+            <text>待分配</text>
+          </view>
+          <view class="approving-blue" wx:if="{{item.dwconstruction!=null && item.conditionType ==3 && item.flowstatus2 ==2 && item.acceptancestatus =='1'}}">
+            <text>已上刊</text>
+          </view>
+          <view class="approving-blue" wx:if="{{item.dwconstruction!=null && item.conditionType ==2 && item.flowstatus2 ==2 && item.acceptancestatus =='1'}}">
+            <text>已下刊</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class='logout'>
+    <view class='user-icon' bindtap="main">
+      <text class='iconfont icon-user'></text>
+    </view>
+  </view>
+  <!-- <view wx-if="{{isLoading}}" class='loading'>正在加载中...</view> -->
+</scroll-view>

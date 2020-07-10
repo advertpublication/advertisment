@@ -1,0 +1,22 @@
+<view class="list">
+  <block wx:for="{{list}}" wx:key="{{index}}">
+    <view 
+        class="item" 
+        data-id="{{item.id}}" 
+        data-previousno="{{item.previousno}}" 
+        data-item="{{item}}" 
+        bindtap="toDetail">
+      <view>
+        <image class="image" src="{{item.imgurl}}"></image>
+      </view>
+      <view class="info">
+        <text class="area">{{item.medialocation}}</text>
+        <text class="company">{{item.contractName}}</text>
+        <text class="date">{{item.registerDate}}</text>
+      </view>
+      <view class="status">
+        <text class="{{tools.formatColor(business,item.acceptancestatus, item.submission, item.flowstatus, item.conditionType)}}">{{tools.formatText(business,item.acceptancestatus, item.submission, item.flowstatus, item.conditionType)}}</text>
+      </view>
+    </view>
+  </block>  
+</view>
