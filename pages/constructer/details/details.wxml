@@ -331,8 +331,6 @@
 								{{times}}
 							</view>
 						</picker>
-             <text wx:if='{{DistributionData.length-1 == index}}' class='iconfont' bindtap="addDistribution">+</text>
-            <text wx:else class='iconfont ' data-index="{{index}}" bindtap="delDistribution">-</text>
 					</view>
 				</view>
 				<!-- 流程复选框 -->
